@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Kennebeck</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:         #07080f;
-      --bg2:        #0b0d17;
-      --panel:      #0f1120;
-      --panel2:     #13152a;
-      --border:     #1e2240;
-      --border2:    #2a2f5a;
-      --gold:       #c9a84c;
-      --gold-light: #e8c96a;
-      --gold-pale:  #f5e4b0;
-      --gold-dim:   rgba(201,168,76,0.12);
-      --text:       #c8cfe0;
-      --text-dim:   #5a6480;
-      --text-mid:   #8892a8;
-      --white:      #f0f2f8;
+      --cream:      #f5f0e8;
+      --cream2:     #ede7d9;
+      --cream3:     #e5ddd0;
+      --navy:       #0d1b2e;
+      --navy2:      #162238;
+      --navy3:      #1e2f48;
+      --gold:       #b8922a;
+      --gold-light: #d4a93a;
+      --gold-bright:#e8bf5a;
+      --gold-dim:   rgba(184,146,42,0.12);
+      --red-tie:    #8b1a1a;
+      --text:       #1a2535;
+      --text-mid:   #3d4f65;
+      --text-dim:   #7a8fa8;
+      --white:      #ffffff;
+      --border:     #d0c8b8;
+      --border-dark:#b8b0a0;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg);
+      background: var(--cream);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
       cursor: none;
     }
 
-    /* CURSOR */
+    /* ── CURSOR ── */
     #cursor {
       position: fixed; width: 8px; height: 8px;
       background: var(--gold); border-radius: 50%;
@@ -41,45 +46,35 @@
       transition: transform 0.12s;
     }
     #cursor-ring {
-      position: fixed; width: 32px; height: 32px;
-      border: 1px solid rgba(201,168,76,0.4);
+      position: fixed; width: 30px; height: 30px;
+      border: 1px solid rgba(184,146,42,0.5);
       border-radius: 50%; pointer-events: none; z-index: 9998;
       transform: translate(-50%,-50%);
       transition: border-color 0.2s;
     }
 
-    /* BG GRID */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(201,168,76,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.018) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none; z-index: 0;
-    }
-
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.5rem 5rem;
-      background: rgba(7,8,15,0.9);
-      backdrop-filter: blur(24px);
+      padding: 1.3rem 5rem;
+      background: rgba(245,240,232,0.95);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-wordmark {
       font-family: 'Playfair Display', serif;
       font-size: 1.1rem; font-weight: 700;
-      color: var(--white); letter-spacing: 0.06em;
+      color: var(--navy); letter-spacing: 0.04em;
     }
     .nav-wordmark em { color: var(--gold); font-style: italic; }
-    nav ul { display: flex; gap: 3rem; list-style: none; }
+
+    nav ul { display: flex; gap: 2.5rem; list-style: none; }
     nav a {
       font-size: 0.72rem; font-weight: 500;
       color: var(--text-dim); text-decoration: none;
       letter-spacing: 0.12em; text-transform: uppercase;
-      transition: color 0.25s; position: relative;
+      transition: color 0.2s; position: relative;
     }
     nav a::after {
       content: ''; position: absolute;
@@ -88,173 +83,207 @@
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.3s;
     }
-    nav a:hover { color: var(--gold-light); }
+    nav a:hover { color: var(--gold); }
     nav a:hover::after { transform: scaleX(1); }
 
-    /* HERO */
+    /* ── HERO ── */
     #hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 0 5rem; z-index: 1; overflow: hidden;
-    }
-    .hero-mono {
-      position: absolute; right: 3%;
-      top: 50%; transform: translateY(-50%);
-      font-family: 'Playfair Display', serif;
-      font-size: 30vw; font-weight: 900; line-height: 1;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(201,168,76,0.055);
-      pointer-events: none; user-select: none;
-      letter-spacing: -0.04em;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
     }
 
-    /* Photo frame */
-    .hero-photo-frame {
-      position: absolute; right: 5rem; top: 50%;
-      transform: translateY(-50%);
-      width: 300px; height: 400px;
-    }
-    .hero-photo-border {
-      position: absolute; inset: -8px;
-      border: 1px solid var(--border2);
-    }
-    .hero-photo-border::before {
-      content: ''; position: absolute;
-      top: -1px; left: 20px; right: 20px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-    .hero-photo-border::after {
-      content: ''; position: absolute;
-      bottom: -1px; left: 20px; right: 20px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-    .hero-photo-inner {
-      width: 100%; height: 100%;
-      background: var(--panel2); position: relative;
-      overflow: hidden; display: flex;
-      align-items: center; justify-content: center;
-    }
-    .hero-photo-inner img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: top;
-      filter: grayscale(15%) contrast(1.05);
-    }
-    .photo-placeholder {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 0.75rem; color: var(--text-dim);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.15em;
-      text-transform: uppercase; text-align: center; padding: 2rem;
-    }
-    .ph-icon { font-size: 2.2rem; opacity: 0.25; }
-    .corner { position: absolute; width: 18px; height: 18px; }
-    .corner.tl { top:-1px; left:-1px; border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
-    .corner.tr { top:-1px; right:-1px; border-top:2px solid var(--gold); border-right:2px solid var(--gold); }
-    .corner.bl { bottom:-1px; left:-1px; border-bottom:2px solid var(--gold); border-left:2px solid var(--gold); }
-    .corner.br { bottom:-1px; right:-1px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); }
-    .hero-photo-label {
-      position: absolute; bottom: -2.2rem; left: 0; right: 0;
-      text-align: center;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--text-dim);
+    /* LEFT — cream */
+    .hero-left {
+      background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 4rem 6rem 5rem;
+      position: relative; z-index: 2;
     }
 
-    .hero-content { max-width: 560px; position: relative; z-index: 2; }
+    /* Subtle texture lines */
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 39px,
+        rgba(184,146,42,0.06) 39px, rgba(184,146,42,0.06) 40px
+      );
+      pointer-events: none;
+    }
 
     .hero-kicker {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex; align-items: center; gap: 0.9rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.63rem; color: var(--gold);
+      font-size: 0.62rem; color: var(--gold);
       letter-spacing: 0.28em; text-transform: uppercase;
       margin-bottom: 1.8rem;
       opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
     }
-    .hero-kicker::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+    .hero-kicker::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
 
     .hero-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3.8rem, 5.8vw, 6.2rem);
-      font-weight: 900; line-height: 0.92;
-      color: var(--white); letter-spacing: -0.02em;
+      font-size: clamp(3.5rem, 5vw, 5.8rem);
+      font-weight: 900; line-height: 0.93;
+      color: var(--navy); letter-spacing: -0.02em;
       opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
+      position: relative; z-index: 1;
     }
     .hero-name .line2 {
-      display: block;
-      background: linear-gradient(100deg, var(--gold), var(--gold-light) 60%, var(--gold-pale));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; font-style: italic;
+      display: block; font-style: italic;
+      color: var(--gold);
     }
 
     .hero-rule {
       display: flex; align-items: center; gap: 1rem;
-      margin: 2rem 0;
+      margin: 1.8rem 0;
       opacity: 0; animation: fadeUp 0.6s 0.6s forwards;
     }
-    .hero-rule::before, .hero-rule::after {
-      content: ''; flex: 1; height: 1px;
+    .hero-rule::before {
+      content: ''; width: 40px; height: 1px;
+      background: var(--gold);
     }
-    .hero-rule::before { background: linear-gradient(90deg, var(--gold), transparent); }
-    .hero-rule::after  { background: linear-gradient(270deg, var(--gold), transparent); }
-    .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+    .diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+    .hero-rule::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
 
     .hero-bio {
       font-size: 0.97rem; color: var(--text-mid); line-height: 1.85;
-      font-weight: 300; max-width: 460px;
+      font-weight: 300; max-width: 420px;
       opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
     }
 
     .hero-ctas {
-      display: flex; gap: 1rem; margin-top: 2.5rem;
+      display: flex; gap: 0.85rem; margin-top: 2.2rem; flex-wrap: wrap;
       opacity: 0; animation: fadeUp 0.7s 0.85s forwards;
     }
+    .btn-navy {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--navy);
+      color: var(--cream); font-size: 0.73rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; cursor: none;
+      transition: background 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+    }
+    .btn-navy:hover { background: var(--navy3); transform: translateY(-2px); }
+
     .btn-gold {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.9rem 2.2rem;
+      padding: 0.85rem 2rem;
       background: linear-gradient(110deg, var(--gold), var(--gold-light));
-      color: var(--bg); font-size: 0.74rem; font-weight: 600;
+      color: var(--white); font-size: 0.73rem; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
       text-decoration: none; cursor: none;
       transition: opacity 0.2s, transform 0.2s;
-      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
     }
     .btn-gold:hover { opacity: 0.88; transform: translateY(-2px); }
+
     .btn-outline {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.9rem 2.2rem;
-      background: transparent; color: var(--gold);
-      font-size: 0.74rem; font-weight: 500;
+      padding: 0.85rem 2rem;
+      background: transparent; color: var(--navy);
+      font-size: 0.73rem; font-weight: 500;
       letter-spacing: 0.1em; text-transform: uppercase;
       text-decoration: none; cursor: none;
-      border: 1px solid var(--border2);
-      transition: border-color 0.25s, background 0.25s;
+      border: 1px solid var(--border-dark);
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
-    .btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 
     .hero-status {
-      display: flex; gap: 2rem; margin-top: 3rem;
+      display: flex; gap: 1.8rem; margin-top: 2.5rem;
       padding-top: 2rem; border-top: 1px solid var(--border);
       opacity: 0; animation: fadeUp 0.7s 1s forwards;
+      flex-wrap: wrap;
     }
     .status-item {
-      display: flex; align-items: center; gap: 0.5rem;
+      display: flex; align-items: center; gap: 0.45rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; color: var(--text-dim);
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 0.57rem; color: var(--text-dim);
+      letter-spacing: 0.09em; text-transform: uppercase;
     }
     .dot { width: 5px; height: 5px; border-radius: 50%; }
     .dot-gold  { background: var(--gold); animation: pdot 2s ease infinite; }
-    .dot-green { background: #2ecc71; animation: pdot 2s ease 0.5s infinite; }
-    .dot-red   { background: #c0392b; }
+    .dot-green { background: #27ae60; animation: pdot 2s ease 0.5s infinite; }
+    .dot-red   { background: var(--red-tie); }
     @keyframes pdot { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
     @keyframes fadeUp {
-      from { opacity:0; transform:translateY(20px); }
+      from { opacity:0; transform:translateY(18px); }
       to   { opacity:1; transform:translateY(0); }
     }
 
-    /* SECTIONS */
+    /* RIGHT — navy photo panel */
+    .hero-right {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    /* Diagonal slice */
+    .hero-right::before {
+      content: '';
+      position: absolute; top: 0; left: -60px; bottom: 0; width: 80px;
+      background: var(--cream);
+      clip-path: polygon(0 0, 40px 0, 100% 100%, 0 100%);
+      z-index: 3;
+    }
+
+    .hero-photo-wrap {
+      flex: 1; position: relative; overflow: hidden;
+    }
+    .hero-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+      filter: contrast(1.05) saturate(0.9);
+    }
+
+    /* Gold overlay tint */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent 50%,
+        rgba(13,27,46,0.7) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Gold corner accents */
+    .photo-corner { position: absolute; width: 22px; height: 22px; z-index: 2; }
+    .photo-corner.tl { top: 1.5rem; left: 1.5rem; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .photo-corner.tr { top: 1.5rem; right: 1.5rem; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .photo-corner.bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .photo-corner.br { bottom: 1.5rem; right: 1.5rem; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+    .hero-photo-caption {
+      padding: 2.5rem 3rem 2.5rem 4rem;
+      background: var(--navy2);
+      position: relative; z-index: 2;
+      border-top: 1px solid rgba(184,146,42,0.2);
+    }
+    .hero-photo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cream); letter-spacing: 0.04em;
+    }
+    .hero-photo-name em { color: var(--gold-bright); font-style: italic; }
+    .hero-photo-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; color: var(--text-dim);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SHARED SECTION STYLES ── */
     section { position: relative; z-index: 1; padding: 8rem 5rem; }
 
     .sec-header {
@@ -263,54 +292,83 @@
     }
     .sec-num {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; color: var(--gold);
+      font-size: 0.63rem; color: var(--gold);
       letter-spacing: 0.2em; white-space: nowrap;
     }
     h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.9rem);
-      font-weight: 700; color: var(--white); letter-spacing: -0.01em;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 700; color: var(--navy); letter-spacing: -0.01em;
     }
-    .sec-line { flex:1; height:1px; background:linear-gradient(90deg, var(--border2), transparent); }
+    .sec-line { flex:1; height:1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-    /* ABOUT */
-    #about { background: var(--bg2); }
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+
     .about-layout {
       display: grid; grid-template-columns: 1.1fr 0.9fr;
       gap: 6rem; align-items: start;
     }
+
     .about-text p {
-      font-size: 1rem; line-height: 1.9; color: var(--text);
-      font-weight: 300; margin-bottom: 1.3rem;
+      font-size: 1rem; line-height: 1.9; color: var(--text-mid);
+      font-weight: 400; margin-bottom: 1.2rem;
     }
-    .about-text strong { color: var(--gold-light); font-weight: 500; }
+    .about-text strong { color: var(--navy); font-weight: 600; }
     .about-text p:first-child::first-letter {
       font-family: 'Playfair Display', serif;
-      font-size: 3.4rem; font-weight: 700; color: var(--gold);
-      float: left; line-height: 0.78; margin-right: 0.12em; margin-top: 0.1em;
+      font-size: 3.3rem; font-weight: 700; color: var(--gold);
+      float: left; line-height: 0.78; margin-right: 0.12em; margin-top: 0.12em;
     }
+
     .credentials {
       margin-top: 2.5rem; border-top: 1px solid var(--border);
       padding-top: 2rem; display: flex; flex-direction: column; gap: 0.7rem;
     }
     .cred-item {
-      display: flex; align-items: center; gap: 1rem;
+      display: flex; align-items: center; gap: 0.9rem;
       font-size: 0.84rem; color: var(--text-mid);
     }
-    .cred-item::before { content:''; width:14px; height:1px; background:var(--gold); flex-shrink:0; }
-    .cred-item strong { color: var(--text); font-weight: 500; }
+    .cred-item::before { content:''; width:12px; height:1px; background:var(--gold); flex-shrink:0; }
+    .cred-item strong { color: var(--navy); font-weight: 600; }
+
+    /* Awards photo */
+    .about-right { display: flex; flex-direction: column; gap: 2rem; }
+
+    .awards-photo-frame {
+      position: relative;
+    }
+    .awards-photo-frame::before {
+      content: '';
+      position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px;
+      border: 1px solid var(--border-dark);
+      z-index: 0;
+    }
+    .awards-photo-frame img {
+      width: 100%; display: block;
+      position: relative; z-index: 1;
+      filter: contrast(1.03);
+    }
+    .awards-photo-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(13,27,46,0.85));
+      padding: 2rem 1.2rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: rgba(245,240,232,0.8);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      z-index: 2;
+    }
 
     .stats-panel {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 1px; background: var(--border);
       border: 1px solid var(--border);
-      position: sticky; top: 8rem;
     }
     .stat {
-      background: var(--panel); padding: 2rem 1.8rem;
+      background: var(--white); padding: 1.8rem 1.6rem;
       position: relative; overflow: hidden; transition: background 0.3s;
     }
-    .stat:hover { background: var(--panel2); }
+    .stat:hover { background: var(--cream); }
     .stat::after {
       content: ''; position: absolute; top:0; left:0;
       width:100%; height:2px;
@@ -320,87 +378,95 @@
     .stat:hover::after { transform: scaleX(1); }
     .stat-num {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem; font-weight: 700; color: var(--white); line-height: 1;
+      font-size: 2.2rem; font-weight: 700; color: var(--navy); line-height: 1;
     }
-    .stat-num sup { font-size: 1.1rem; color: var(--gold); vertical-align: super; }
+    .stat-num sup { font-size: 1rem; color: var(--gold); vertical-align: super; }
     .stat-label {
-      font-size: 0.68rem; color: var(--text-dim);
-      letter-spacing: 0.1em; text-transform: uppercase;
-      margin-top: 0.5rem; line-height: 1.4;
+      font-size: 0.67rem; color: var(--text-dim);
+      letter-spacing: 0.09em; text-transform: uppercase;
+      margin-top: 0.4rem; line-height: 1.4;
     }
 
-    /* EXPERIENCE */
-    #experience { background: var(--bg); }
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--cream); }
+
     .timeline { display: flex; flex-direction: column; }
     .exp-item {
-      display: grid; grid-template-columns: 190px 1px 1fr;
+      display: grid; grid-template-columns: 185px 1px 1fr;
       gap: 0 2.5rem; padding: 3rem 0;
       border-bottom: 1px solid var(--border);
     }
     .exp-item:first-child { border-top: 1px solid var(--border); }
+
     .exp-meta { padding-top: 0.15rem; text-align: right; }
     .exp-date {
       font-family: 'Space Mono', monospace;
-      font-size: 0.63rem; color: var(--gold); letter-spacing: 0.08em; line-height: 1.6;
+      font-size: 0.62rem; color: var(--gold); letter-spacing: 0.08em; line-height: 1.6;
     }
-    .exp-location { font-size: 0.73rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.5; }
+    .exp-location { font-size: 0.73rem; color: var(--text-dim); margin-top: 0.35rem; line-height: 1.5; }
+
     .timeline-spine { display:flex; flex-direction:column; align-items:center; }
     .spine-dot {
       width: 9px; height: 9px; border-radius: 50%;
       background: var(--gold); flex-shrink: 0; margin-top: 0.2rem;
-      box-shadow: 0 0 10px rgba(201,168,76,0.5);
+      box-shadow: 0 0 0 3px rgba(184,146,42,0.15);
     }
     .spine-line {
       flex:1; width:1px;
-      background: linear-gradient(180deg, rgba(201,168,76,0.18), transparent);
+      background: linear-gradient(180deg, var(--border), transparent);
       margin-top: 6px;
     }
+
     .exp-body { padding-bottom: 0.5rem; }
     .exp-role {
       font-family: 'Playfair Display', serif;
-      font-size: 1.22rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem;
+      font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem;
     }
     .exp-org {
-      font-size: 0.78rem; font-weight: 500; color: var(--gold);
-      letter-spacing: 0.04em; margin-bottom: 1.2rem;
+      font-size: 0.78rem; font-weight: 600; color: var(--gold);
+      letter-spacing: 0.04em; margin-bottom: 1.1rem;
     }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .exp-bullets li {
-      font-size: 0.87rem; color: var(--text-mid);
-      line-height: 1.7; padding-left: 1.3rem; position: relative; font-weight: 300;
+      font-size: 0.88rem; color: var(--text-mid);
+      line-height: 1.7; padding-left: 1.2rem; position: relative; font-weight: 400;
     }
-    .exp-bullets li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:0.75rem; }
-    .exp-bullets li strong { color: var(--text); font-weight: 500; }
-    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.3rem; }
+    .exp-bullets li::before { content:'—'; position:absolute; left:0; color:var(--gold-light); font-size:0.75rem; }
+    .exp-bullets li strong { color: var(--navy); font-weight: 600; }
+
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
     .tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 0.56rem; letter-spacing: 0.09em; text-transform: uppercase;
       padding: 0.28rem 0.65rem;
-      background: var(--panel); border: 1px solid var(--border);
-      color: var(--text-dim); transition: border-color 0.2s, color 0.2s;
+      background: transparent; border: 1px solid var(--border-dark);
+      color: var(--text-dim); transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
-    .tag:hover { border-color: var(--gold); color: var(--gold); }
+    .tag:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
 
-    /* PROJECTS */
-    #projects { background: var(--bg2); }
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy); }
+    #projects h2, #projects .sec-num { color: var(--cream); }
+    #projects .sec-line { background: linear-gradient(90deg, rgba(184,146,42,0.4), transparent); }
+
     .projects-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2px; background: var(--border);
+      gap: 2px; background: rgba(184,146,42,0.1);
     }
     .proj-card {
-      background: var(--panel); padding: 3rem;
+      background: var(--navy2); padding: 3rem;
       position: relative; overflow: hidden; transition: background 0.3s;
     }
-    .proj-card:hover { background: var(--panel2); }
+    .proj-card:hover { background: var(--navy3); }
     .proj-card::before {
       content: attr(data-index);
-      position: absolute; top: 2rem; right: 2.5rem;
+      position: absolute; top: 1.5rem; right: 2rem;
       font-family: 'Playfair Display', serif;
       font-size: 5rem; font-weight: 900;
-      color: rgba(201,168,76,0.05); line-height: 1;
+      color: rgba(184,146,42,0.06); line-height: 1;
       transition: color 0.3s;
     }
-    .proj-card:hover::before { color: rgba(201,168,76,0.09); }
+    .proj-card:hover::before { color: rgba(184,146,42,0.12); }
     .proj-card::after {
       content: ''; position: absolute;
       top:0; left:0; width:3px; height:0%;
@@ -410,64 +476,69 @@
     .proj-card:hover::after { height: 100%; }
     .proj-tag {
       font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; color: var(--gold);
-      letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 0.58rem; color: var(--gold-bright);
+      letter-spacing: 0.16em; text-transform: uppercase;
       margin-bottom: 0.9rem; display: block;
     }
     .proj-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 700; color: var(--white);
-      margin-bottom: 1rem; line-height: 1.2;
+      font-size: 1.3rem; font-weight: 700; color: var(--cream);
+      margin-bottom: 0.9rem; line-height: 1.2;
     }
-    .proj-desc { font-size: 0.86rem; color: var(--text-mid); line-height: 1.75; font-weight: 300; }
+    .proj-desc { font-size: 0.86rem; color: rgba(200,207,224,0.7); line-height: 1.75; font-weight: 300; }
     .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
+    .proj-card .tag {
+      border-color: rgba(184,146,42,0.2); color: rgba(200,207,224,0.5);
+    }
+    .proj-card .tag:hover { border-color: var(--gold-bright); color: var(--gold-bright); background: rgba(184,146,42,0.08); }
     .proj-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex; align-items: center; gap: 0.45rem;
       margin-top: 1.4rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.63rem; color: var(--gold);
+      font-size: 0.62rem; color: var(--gold-bright);
       text-decoration: none; letter-spacing: 0.1em;
       transition: gap 0.2s, color 0.2s;
     }
-    .proj-link:hover { gap: 0.8rem; color: var(--gold-light); }
+    .proj-link:hover { gap: 0.75rem; color: var(--gold-light); }
     .proj-link::after { content: '→'; }
 
-    /* SKILLS */
-    #skills { background: var(--bg); }
+    /* ── SKILLS ── */
+    #skills { background: var(--white); }
+
     .skills-layout {
       display: grid; grid-template-columns: 1fr 2fr;
       gap: 5rem; align-items: start;
     }
     .skills-intro h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 700; color: var(--white);
+      font-size: 1.45rem; font-weight: 700; color: var(--navy);
       margin-bottom: 1rem; line-height: 1.3;
     }
-    .skills-intro p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; font-weight: 300; }
-    .skills-divider { width: 38px; height: 1px; background: var(--gold); margin: 1.5rem 0; }
-    .certifications-mini { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .skills-intro p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.8; font-weight: 400; }
+    .skills-divider { width: 36px; height: 1px; background: var(--gold); margin: 1.5rem 0; }
+    .certifications-mini { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .cert-mini {
-      display: flex; align-items: center; gap: 0.75rem;
-      font-size: 0.8rem; color: var(--text-mid); font-weight: 300;
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.8rem; color: var(--text-mid); font-weight: 400;
     }
-    .cert-mini::before { content:'✦'; color:var(--gold); font-size:0.5rem; flex-shrink:0; }
-    .cert-mini strong { color: var(--text); font-weight: 500; }
+    .cert-mini::before { content:'✦'; color:var(--gold); font-size:0.48rem; flex-shrink:0; }
+    .cert-mini strong { color: var(--navy); font-weight: 600; }
 
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 4rem; }
     .skill-group-title {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem; color: var(--gold);
-      letter-spacing: 0.2em; text-transform: uppercase;
-      margin-bottom: 1.2rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 1.1rem;
       display: flex; align-items: center; gap: 0.6rem;
     }
     .skill-group-title::after { content:''; flex:1; height:1px; background:var(--border); }
-    .skill-row { margin-bottom: 0.9rem; }
+    .skill-row { margin-bottom: 0.85rem; }
     .skill-row-header {
       display: flex; justify-content: space-between;
       font-size: 0.82rem; color: var(--text); margin-bottom: 0.4rem; font-weight: 400;
     }
-    .skill-row-pct { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--text-dim); }
+    .skill-row-pct { font-family: 'Space Mono', monospace; font-size: 0.57rem; color: var(--text-dim); }
     .bar-track { height: 2px; background: var(--border); position: relative; }
     .bar-fill {
       position: absolute; top:0; left:0; height:100%;
@@ -476,80 +547,88 @@
     }
     @keyframes barGrow { from { width: 0 !important; } }
 
-    /* AWARDS */
-    #awards { background: var(--bg2); }
+    /* ── AWARDS ── */
+    #awards { background: var(--cream2); }
     .awards-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2px; background: var(--border);
     }
     .award-card {
-      background: var(--panel); padding: 2.5rem;
+      background: var(--white); padding: 2.5rem;
       border-top: 2px solid transparent;
       transition: border-color 0.3s, background 0.3s;
     }
-    .award-card:hover { border-top-color: var(--gold); background: var(--panel2); }
-    .award-icon { font-size: 1.5rem; margin-bottom: 1.2rem; display: block; }
+    .award-card:hover { border-top-color: var(--gold); background: var(--cream); }
+    .award-icon { font-size: 1.4rem; margin-bottom: 1.1rem; display: block; }
     .award-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.35rem;
+      font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem;
     }
     .award-org {
       font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; color: var(--gold);
-      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem;
+      font-size: 0.57rem; color: var(--gold);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.7rem;
     }
-    .award-desc { font-size: 0.81rem; color: var(--text-dim); line-height: 1.65; font-weight: 300; }
+    .award-desc { font-size: 0.81rem; color: var(--text-mid); line-height: 1.65; font-weight: 400; }
 
-    /* CONTACT */
-    #contact { background: var(--bg); }
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); }
+    #contact h2 { color: var(--cream); }
+    #contact .sec-num { color: var(--gold-bright); }
+    #contact .sec-line { background: linear-gradient(90deg, rgba(184,146,42,0.4), transparent); }
+    #contact p { color: rgba(200,207,224,0.7); }
+
     .contact-layout {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 6rem; align-items: center;
     }
     .contact-left p {
-      font-size: 0.97rem; color: var(--text-dim); line-height: 1.85;
+      font-size: 0.97rem; line-height: 1.85;
       font-weight: 300; margin-bottom: 2rem;
     }
     .contact-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .contact-right { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+    .contact-right { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(184,146,42,0.2); }
     .contact-detail {
-      padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem; border-bottom: 1px solid rgba(184,146,42,0.1);
       display: flex; align-items: center; gap: 1.2rem; transition: background 0.2s;
     }
     .contact-detail:last-child { border-bottom: none; }
-    .contact-detail:hover { background: var(--panel); }
-    .contact-detail-icon { font-size: 1rem; flex-shrink: 0; opacity: 0.55; }
+    .contact-detail:hover { background: rgba(184,146,42,0.05); }
+    .contact-detail-icon { font-size: 1rem; flex-shrink: 0; opacity: 0.5; }
     .contact-detail-label {
       font-family: 'Space Mono', monospace;
-      font-size: 0.56rem; color: var(--gold);
+      font-size: 0.55rem; color: var(--gold-bright);
       letter-spacing: 0.14em; text-transform: uppercase;
       display: block; margin-bottom: 0.2rem;
     }
-    .contact-detail-val { font-size: 0.87rem; color: var(--text); font-weight: 300; }
+    .contact-detail-val { font-size: 0.87rem; color: var(--cream); font-weight: 300; }
     .contact-detail a { color: inherit; text-decoration: none; transition: color 0.2s; }
-    .contact-detail a:hover { color: var(--gold-light); }
+    .contact-detail a:hover { color: var(--gold-bright); }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      background: var(--bg2); border-top: 1px solid var(--border);
+      background: var(--navy2); border-top: 1px solid rgba(184,146,42,0.15);
       padding: 2.5rem 5rem;
       display: flex; justify-content: space-between; align-items: center;
       position: relative; z-index: 1;
     }
-    .footer-left { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-dim); }
+    .footer-left { font-family: 'Playfair Display', serif; font-size: 1rem; color: rgba(200,207,224,0.5); }
     .footer-left em { color: var(--gold); font-style: italic; }
-    .footer-right { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.1em; }
+    .footer-right { font-family: 'Space Mono', monospace; font-size: 0.57rem; color: rgba(200,207,224,0.35); letter-spacing: 0.1em; }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       nav { padding: 1.2rem 2rem; }
       nav ul { gap: 1.5rem; }
-      #hero, section { padding: 6rem 2rem; }
-      .hero-photo-frame, .hero-mono { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 7rem 2rem 4rem; }
+      .hero-right { min-height: 50vh; }
+      .hero-right::before { display: none; }
+      section { padding: 6rem 2rem; }
       .about-layout, .skills-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .projects-grid, .awards-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .awards-grid { grid-template-columns: 1fr 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
-      .stats-panel { position: static; }
       .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
       .timeline-spine { display: none; }
       .exp-meta { text-align: left; }
@@ -576,42 +655,37 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-mono">RK</div>
-
-    <div class="hero-content">
+    <!-- LEFT: text -->
+    <div class="hero-left">
       <div class="hero-kicker">Cybersecurity &amp; Global Policy</div>
-      <h1 class="hero-name">
-        Ryan<br>
-        <span class="line2">Kennebeck</span>
-      </h1>
+      <h1 class="hero-name">Ryan<br><span class="line2">Kennebeck</span></h1>
       <div class="hero-rule"><div class="diamond"></div></div>
-      <p class="hero-bio">
-        Threat intelligence analyst, red team operator, and policy strategist. Deployed at the intersection of offensive security, artificial intelligence, and international security doctrine.
-      </p>
+      <p class="hero-bio">Threat intelligence analyst, red team operator, and policy strategist. Deployed at the intersection of offensive security, artificial intelligence, and international security doctrine.</p>
       <div class="hero-ctas">
-        <a href="#experience" class="btn-gold">View Record</a>
+        <a href="#experience" class="btn-navy">View Record</a>
         <a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank" class="btn-outline">LinkedIn ↗</a>
         <a href="https://github.com/RyanKennebeck" target="_blank" class="btn-outline">GitHub ↗</a>
       </div>
       <div class="hero-status">
         <div class="status-item"><span class="dot dot-gold"></span>Indiana University · 2028</div>
-        <div class="status-item"><span class="dot dot-green"></span>Open to Opportunities</div>
+        <div class="status-item"><span class="dot dot-green"></span>Open to Roles</div>
         <div class="status-item"><span class="dot dot-red"></span>Fidelity · Summer 2026</div>
       </div>
     </div>
 
-    <!-- PHOTO: replace placeholder with <img src="photo.jpg" alt="Ryan Kennebeck" /> -->
-    <div class="hero-photo-frame">
-      <div class="hero-photo-border"></div>
-      <div class="hero-photo-inner">
-        <div class="corner tl"></div><div class="corner tr"></div>
-        <div class="corner bl"></div><div class="corner br"></div>
-        <div class="photo-placeholder">
-          <div class="ph-icon">◈</div>
-          <div>Place photo.jpg<br>in your repo folder</div>
-        </div>
+    <!-- RIGHT: headshot -->
+    <div class="hero-right">
+      <div class="hero-photo-wrap">
+        <img src="headshot.jpg" alt="Ryan Kennebeck"/>
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
       </div>
-      <div class="hero-photo-label">Indiana University · Cincinnati · Global</div>
+      <div class="hero-photo-caption">
+        <div class="hero-photo-name">Ryan <em>Kennebeck</em></div>
+        <div class="hero-photo-title">Indiana University · Cybersecurity &amp; Global Policy</div>
+      </div>
     </div>
   </section>
 
@@ -624,7 +698,7 @@
     </div>
     <div class="about-layout">
       <div class="about-text">
-        <p>I am a <strong>Cybersecurity &amp; Global Policy</strong> double major at Indiana University with demonstrated experience spanning offensive security operations, enterprise AI development, and high-stakes institutional leadership. My work occupies a rare convergence — technical depth married to strategic thinking.</p>
+        <p>I am a <strong>Cybersecurity &amp; Global Policy</strong> double major at Indiana University with demonstrated experience spanning offensive security operations, enterprise AI development, and high-stakes institutional leadership — a rare convergence of technical depth and strategic range.</p>
         <p>At <strong>AP2T Labs</strong>, I engineered over <strong>800 high-fidelity phishing simulations</strong> deployed in campaigns reaching more than <strong>one million employees</strong>. I replicated the visual and behavioral fingerprints of Microsoft 365, Google Workspace, Slack, and Apple — building adversarial realism at scale while maintaining rigorous ethical guardrails.</p>
         <p>In a cross-continental collaboration with <strong>Indiana University, Northumbria University, and Northumbria Police</strong>, I developed and deployed a live AI platform prototype for UK law enforcement. I also attended <strong>DEF CON</strong> in Las Vegas — one of the world's foremost security conferences — gaining direct exposure to leading-edge offensive and defensive research.</p>
         <p>As elected <strong>President of Kappa Sigma</strong>, I transformed a struggling chapter into a 170+ member organization ranked <strong>2nd of 35 chapters</strong> at Indiana University, while managing $3.1M in real estate negotiations and leading crisis governance under pressure. Long-term objective: operating at the convergence of <strong>cyber operations and international security strategy</strong>.</p>
@@ -636,7 +710,14 @@
           <div class="cred-item"><strong>Google Cybersecurity Professional</strong> — Certified, July 2025</div>
         </div>
       </div>
-      <div>
+
+      <div class="about-right">
+        <!-- Awards photo -->
+        <div class="awards-photo-frame">
+          <img src="awards.jpg" alt="Ryan Kennebeck accepting Kappa Sigma awards at Indiana University"/>
+          <div class="awards-photo-label">IU OSFL Awards Ceremony · 2025 — 4 Chapter Awards including 2nd Place Chapter of Achievement</div>
+        </div>
+
         <div class="stats-panel">
           <div class="stat"><div class="stat-num">800<sup>+</sup></div><div class="stat-label">Phishing Simulations<br>Engineered</div></div>
           <div class="stat"><div class="stat-num">1M<sup>+</sup></div><div class="stat-label">Employees Reached<br>in Campaigns</div></div>
@@ -659,23 +740,23 @@
     <div class="timeline">
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">Jul 2025 – Present</div><div class="exp-location">Cincinnati, OH<br>On-site</div></div>
+        <div class="exp-meta"><div class="exp-date">Jul 2025 – Present</div><div class="exp-location">Cincinnati, OH · On-site</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div><div class="spine-line"></div></div>
         <div class="exp-body">
           <div class="exp-role">Security Intern</div>
           <div class="exp-org">AP2T Labs</div>
           <ul class="exp-bullets">
             <li>Engineered <strong>800+ high-fidelity phishing simulation templates</strong> for enterprise security awareness campaigns reaching over one million employees across finance, technology, education, and legal sectors.</li>
-            <li>Replicated brand ecosystems — Microsoft 365, Google Workspace, Slack, Apple, major financial institutions — with pixel-accurate HTML/CSS encompassing MFA fatigue, smishing, calendar-invite lures, and credential-prompt vectors.</li>
-            <li>Built a <strong>rapid production design system</strong> to ideate, code, QA, and deploy dozens of branded simulations daily, maintaining visual authenticity and cross-platform rendering integrity across Outlook, Gmail, and mobile.</li>
-            <li>Operated within a red team simulation lab focused on visual deception, timing strategy, and user-behavior modeling — balancing adversarial realism with corporate compliance standards.</li>
+            <li>Replicated brand ecosystems — Microsoft 365, Google Workspace, Slack, Apple — with pixel-accurate HTML/CSS encompassing MFA fatigue, smishing, calendar-invite lures, and credential-prompt vectors.</li>
+            <li>Built a <strong>rapid production design system</strong> to ideate, code, QA, and deploy dozens of branded simulations daily, maintaining visual authenticity and cross-platform rendering integrity.</li>
+            <li>Operated within a red team simulation lab balancing adversarial realism with corporate compliance and security education standards.</li>
           </ul>
           <div class="exp-tags"><span class="tag">Red Teaming</span><span class="tag">HTML / CSS</span><span class="tag">Social Engineering</span><span class="tag">Security Awareness</span><span class="tag">UX Deception</span></div>
         </div>
       </div>
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">Summer 2026</div><div class="exp-location">Covington, KY<br>Upcoming</div></div>
+        <div class="exp-meta"><div class="exp-date">Summer 2026</div><div class="exp-location">Covington, KY · Upcoming</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div><div class="spine-line"></div></div>
         <div class="exp-body">
           <div class="exp-role">Audit, Risk &amp; Compliance Intern</div>
@@ -689,13 +770,13 @@
       </div>
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">Summer 2025</div><div class="exp-location">England / Remote<br>Cross-Continental</div></div>
+        <div class="exp-meta"><div class="exp-date">Summer 2025</div><div class="exp-location">England / Remote</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div><div class="spine-line"></div></div>
         <div class="exp-body">
           <div class="exp-role">AI Tool Developer</div>
           <div class="exp-org">Northumbria Police × Indiana University × Northumbria University</div>
           <ul class="exp-bullets">
-            <li>Developed and deployed a <strong>live AI platform prototype</strong> to support Northumbria Police in public safety operations — a cross-continental collaboration between two universities and an active law enforcement agency.</li>
+            <li>Developed and deployed a <strong>live AI platform prototype</strong> for Northumbria Police in a cross-continental collaboration between two universities and an active law enforcement agency.</li>
             <li>Applied UX design principles and AI engineering to build a responsive, accessible web platform purpose-built for law enforcement operational requirements.</li>
           </ul>
           <div class="exp-tags"><span class="tag">AI Development</span><span class="tag">UX / HCI</span><span class="tag">Public Safety Tech</span><span class="tag">International</span></div>
@@ -703,15 +784,15 @@
       </div>
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">Apr 2025 – Present</div><div class="exp-location">Indiana University<br>On-site</div></div>
+        <div class="exp-meta"><div class="exp-date">Apr 2025 – Present</div><div class="exp-location">Indiana University · On-site</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div><div class="spine-line"></div></div>
         <div class="exp-body">
           <div class="exp-role">President</div>
           <div class="exp-org">Kappa Sigma Fraternity — Beta Theta Chapter, Indiana University</div>
           <ul class="exp-bullets">
-            <li>Elected President and transformed a sub-100 member chapter into a <strong>170+ member organization</strong>, ranked <strong>2nd of 35 chapters</strong> in Indiana University's Chapter of Achievement rankings.</li>
-            <li>Led high-level negotiations with alumni, university officials, and interfraternity councils managing multi-property housing agreements exceeding <strong>$3.1M</strong> in on-campus real estate value.</li>
-            <li>Oversaw executive operations, judicial governance, risk management, recruitment, philanthropy, and campus relations concurrently — implementing operational modernization across all functions.</li>
+            <li>Elected President and transformed a sub-100 member chapter into a <strong>170+ member organization</strong>, ranked <strong>2nd of 35 chapters</strong> in IU's Chapter of Achievement rankings.</li>
+            <li>Led negotiations with alumni, university officials, and interfraternity councils managing housing agreements exceeding <strong>$3.1M</strong> in on-campus real estate value.</li>
+            <li>Oversaw executive operations, judicial governance, risk management, recruitment, philanthropy, and campus relations concurrently.</li>
             <li>Led chapter to five recognized awards including Service Engagement, Community Collaboration, and Internal Brotherhood designations.</li>
           </ul>
           <div class="exp-tags"><span class="tag">Executive Leadership</span><span class="tag">Governance</span><span class="tag">Risk Management</span><span class="tag">Negotiation</span></div>
@@ -719,28 +800,28 @@
       </div>
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">May – Aug 2024</div><div class="exp-location">Cincinnati, OH<br>Remote</div></div>
+        <div class="exp-meta"><div class="exp-date">May – Aug 2024</div><div class="exp-location">Cincinnati, OH · Remote</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div><div class="spine-line"></div></div>
         <div class="exp-body">
           <div class="exp-role">AI Developer</div>
           <div class="exp-org">Living History</div>
           <ul class="exp-bullets">
             <li>Designed and trained AI simulations emulating historical figures using GPT-based architectures, reinforcement learning, and advanced prompt optimization.</li>
-            <li>Integrated historical speech patterns, behavioral traits, and primary-source data to produce contextually grounded conversational agents for web-based educational deployment.</li>
+            <li>Integrated primary-source data, speech patterns, and behavioral traits to produce grounded conversational agents for web-based educational deployment.</li>
           </ul>
           <div class="exp-tags"><span class="tag">LLMs</span><span class="tag">Prompt Engineering</span><span class="tag">Python</span><span class="tag">AI / ML</span></div>
         </div>
       </div>
 
       <div class="exp-item">
-        <div class="exp-meta"><div class="exp-date">Aug – Oct 2023</div><div class="exp-location">Cincinnati, OH<br>On-site</div></div>
+        <div class="exp-meta"><div class="exp-date">Aug – Oct 2023</div><div class="exp-location">Cincinnati, OH · On-site</div></div>
         <div class="timeline-spine"><div class="spine-dot"></div></div>
         <div class="exp-body">
           <div class="exp-role">Gameday Systems Intern</div>
           <div class="exp-org">Cincinnati Reds — Great American Ball Park</div>
           <ul class="exp-bullets">
             <li>Operated stadium-wide AV infrastructure — live video boards, real-time replays, digital advertising, and intro sequences — during Major League Baseball home games.</li>
-            <li>Managed backend control room workflows under game-day operational pressure, including Daktronics systems, multi-camera feeds, and live media switching.</li>
+            <li>Managed backend control room workflows under game-day pressure including Daktronics systems, multi-camera feeds, and live media switching.</li>
           </ul>
           <div class="exp-tags"><span class="tag">AV Systems</span><span class="tag">Live Production</span><span class="tag">Daktronics</span></div>
         </div>
@@ -760,7 +841,7 @@
       <div class="proj-card" data-index="I">
         <span class="proj-tag">Computer Vision · AI · Defense</span>
         <div class="proj-title">HAVEN System</div>
-        <p class="proj-desc">AI-powered smart-glasses surveillance prototype with real-time computer vision. Detects faces, license plates, and behavioral anomalies from live camera input, with AR-style HUD overlays and event logging pipelines. Designed as a proof-of-concept for law enforcement, military, and public safety environments.</p>
+        <p class="proj-desc">AI-powered smart-glasses surveillance prototype with real-time computer vision. Detects faces, license plates, and behavioral anomalies from live camera input with AR-style HUD overlays and event logging pipelines. Proof-of-concept for law enforcement, military, and public safety environments.</p>
         <div class="proj-stack"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">YOLOv8</span><span class="tag">DeepFace</span><span class="tag">OCR</span></div>
         <a href="https://github.com/RyanKennebeck/HAVEN-System" target="_blank" class="proj-link">View on GitHub</a>
       </div>
@@ -773,13 +854,13 @@
       <div class="proj-card" data-index="III">
         <span class="proj-tag">AI · Law Enforcement · UX</span>
         <div class="proj-title">Northumbria Police AI Platform</div>
-        <p class="proj-desc">Cross-continental collaboration with Indiana University and Northumbria University resulting in a deployed AI platform for UK law enforcement. Applied UX design, conversational AI, and public safety research to build a live institutional tool in active use by Northumbria Police.</p>
+        <p class="proj-desc">Cross-continental collaboration with Indiana University and Northumbria University resulting in a deployed AI platform for UK law enforcement. Applied UX design, conversational AI, and public safety research to build a live institutional tool in active use.</p>
         <div class="proj-stack"><span class="tag">AI Development</span><span class="tag">Web Platform</span><span class="tag">HCI / UX</span><span class="tag">Public Safety</span></div>
       </div>
       <div class="proj-card" data-index="IV">
         <span class="proj-tag">Red Team · Enterprise Scale</span>
         <div class="proj-title">Enterprise Phishing Simulation Suite</div>
-        <p class="proj-desc">Production library of 800+ high-fidelity HTML email simulations replicating Microsoft 365, Google, Slack, Apple, and financial institutions. Multi-vector coverage: SMS, MFA fatigue, calendar lures, and credential prompts — deployed in campaigns reaching over one million employees.</p>
+        <p class="proj-desc">Production library of 800+ high-fidelity HTML email simulations replicating Microsoft 365, Google, Slack, Apple, and financial institutions. Multi-vector coverage — SMS, MFA fatigue, calendar lures, credential prompts — deployed in campaigns reaching over one million employees.</p>
         <div class="proj-stack"><span class="tag">HTML / CSS</span><span class="tag">Social Engineering</span><span class="tag">Security Awareness</span><span class="tag">Red Team</span></div>
       </div>
     </div>
@@ -857,42 +938,12 @@
       <div class="sec-line"></div>
     </div>
     <div class="awards-grid">
-      <div class="award-card">
-        <span class="award-icon">🏛️</span>
-        <div class="award-title">FBI Collegiate Academy</div>
-        <div class="award-org">FBI Indianapolis · 2025</div>
-        <p class="award-desc">Selected for a highly competitive program offering direct engagement with FBI professionals in investigative strategy, intelligence coordination, and the evolving cyber threat landscape.</p>
-      </div>
-      <div class="award-card">
-        <span class="award-icon">🎖️</span>
-        <div class="award-title">Chapter of Achievement — 2nd of 35</div>
-        <div class="award-org">Indiana University OSFL · 2025</div>
-        <p class="award-desc">Led Kappa Sigma Beta Theta to a top-two finish among 35 competing chapters university-wide, recognizing excellence in leadership, compliance, and community impact.</p>
-      </div>
-      <div class="award-card">
-        <span class="award-icon">🔐</span>
-        <div class="award-title">DEF CON Las Vegas</div>
-        <div class="award-org">AP2T Labs · 2025</div>
-        <p class="award-desc">Attended one of the world's most prestigious hacking and cybersecurity conferences, sponsored by AP2T Labs. Connected with leading researchers and practitioners at the field's frontier.</p>
-      </div>
-      <div class="award-card">
-        <span class="award-icon">🎓</span>
-        <div class="award-title">Dean's Scholarship</div>
-        <div class="award-org">Indiana University · 2024</div>
-        <p class="award-desc">Merit-based scholarship recognizing exceptional academic achievement. Member of the Hoosier Scholars Program. Graduated high school Summa Cum Laude with a 4.6 GPA.</p>
-      </div>
-      <div class="award-card">
-        <span class="award-icon">🌍</span>
-        <div class="award-title">Cross-Continental AI Deployment</div>
-        <div class="award-org">Northumbria Police · UK · 2025</div>
-        <p class="award-desc">Among a select group chosen to develop and deploy a live AI platform for active UK law enforcement in a collaboration spanning two universities and two countries.</p>
-      </div>
-      <div class="award-card">
-        <span class="award-icon">📜</span>
-        <div class="award-title">Google Cybersecurity Certificate</div>
-        <div class="award-org">Google · July 2025</div>
-        <p class="award-desc">Professional certification covering threat detection, network security, incident response, and security operations. Pursuing CompTIA Security+ to follow.</p>
-      </div>
+      <div class="award-card"><span class="award-icon">🏛️</span><div class="award-title">FBI Collegiate Academy</div><div class="award-org">FBI Indianapolis · 2025</div><p class="award-desc">Selected for a highly competitive program offering direct engagement with FBI professionals in investigative strategy, intelligence coordination, and the evolving cyber threat landscape.</p></div>
+      <div class="award-card"><span class="award-icon">🎖️</span><div class="award-title">Chapter of Achievement — 2nd of 35</div><div class="award-org">Indiana University OSFL · 2025</div><p class="award-desc">Led Kappa Sigma Beta Theta to a top-two finish among 35 competing chapters university-wide, recognizing excellence in leadership, compliance, and community impact.</p></div>
+      <div class="award-card"><span class="award-icon">🔐</span><div class="award-title">DEF CON Las Vegas</div><div class="award-org">AP2T Labs · 2025</div><p class="award-desc">Attended one of the world's most prestigious hacking and cybersecurity conferences, sponsored by AP2T Labs. Connected with leading researchers and practitioners at the field's frontier.</p></div>
+      <div class="award-card"><span class="award-icon">🎓</span><div class="award-title">Dean's Scholarship</div><div class="award-org">Indiana University · 2024</div><p class="award-desc">Merit-based scholarship recognizing exceptional academic achievement. Member of the Hoosier Scholars Program. Graduated high school Summa Cum Laude with a 4.6 GPA.</p></div>
+      <div class="award-card"><span class="award-icon">🌍</span><div class="award-title">Cross-Continental AI Deployment</div><div class="award-org">Northumbria Police · UK · 2025</div><p class="award-desc">Among a select group chosen to develop and deploy a live AI platform for UK law enforcement in a collaboration spanning two universities and two countries.</p></div>
+      <div class="award-card"><span class="award-icon">📜</span><div class="award-title">Google Cybersecurity Certificate</div><div class="award-org">Google · July 2025</div><p class="award-desc">Professional certification covering threat detection, network security, incident response, and security operations. Pursuing CompTIA Security+ to follow.</p></div>
     </div>
   </section>
 
@@ -908,26 +959,14 @@
         <p>Open to internships, research collaborations, and conversations at the intersection of cyber operations, AI, and global security strategy. Always interested in connecting with professionals operating at the edge of the field.</p>
         <div class="contact-ctas">
           <a href="mailto:ryankennebeck06@gmail.com" class="btn-gold">Send a Message</a>
-          <a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank" class="btn-outline" style="color:var(--cream);border-color:rgba(184,146,42,0.3);">LinkedIn ↗</a>
         </div>
       </div>
       <div class="contact-right">
-        <div class="contact-detail">
-          <div class="contact-detail-icon">✉</div>
-          <div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="mailto:ryankennebeck06@gmail.com">ryankennebeck06@gmail.com</a></div></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📍</div>
-          <div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🔗</div>
-          <div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">⌨</div>
-          <div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div>
-        </div>
+        <div class="contact-detail"><div class="contact-detail-icon">✉</div><div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="mailto:ryankennebeck06@gmail.com">ryankennebeck06@gmail.com</a></div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon">📍</div><div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon">🔗</div><div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon">⌨</div><div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div></div>
       </div>
     </div>
   </section>
@@ -942,52 +981,22 @@
     // Cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursor-ring');
-    let mx=0, my=0, rx=0, ry=0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+    (function animRing(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2.5)'; ring.style.borderColor='rgba(184,146,42,0.7)'; });
+      el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.borderColor='rgba(184,146,42,0.5)'; });
     });
-    (function animRing(){
-      rx += (mx-rx)*0.13; ry += (my-ry)*0.13;
-      ring.style.left = rx+'px'; ring.style.top = ry+'px';
-      requestAnimationFrame(animRing);
-    })();
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
-        ring.style.borderColor = 'rgba(201,168,76,0.75)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.borderColor = 'rgba(201,168,76,0.4)';
-      });
-    });
-
-    // Subtle name glitch
-    const nameEl = document.querySelector('.hero-name');
-    const gc = '█▓▒░';
-    setInterval(()=>{
-      const orig = 'Ryan';
-      let n=0;
-      const id = setInterval(()=>{
-        if(n++>4){ nameEl.childNodes[0].textContent='Ryan'; clearInterval(id); return; }
-        nameEl.childNodes[0].textContent = orig.split('').map(c => Math.random()>0.72 ? gc[Math.floor(Math.random()*4)] : c).join('');
-      },70);
-    },7000);
 
     // Skill bars on scroll
-    const bars = document.querySelectorAll('.bar-fill');
-    const bObs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.animationPlayState='running'; bObs.unobserve(e.target); } });
-    },{threshold:0.3});
-    bars.forEach(b=>{ b.style.animationPlayState='paused'; bObs.observe(b); });
+    const bObs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.animationPlayState='running'; bObs.unobserve(e.target); } }); },{threshold:0.3});
+    document.querySelectorAll('.bar-fill').forEach(b=>{ b.style.animationPlayState='paused'; bObs.observe(b); });
 
-    // Fade in on scroll
-    const fObs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
-    },{threshold:0.07});
+    // Fade on scroll
+    const fObs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }); },{threshold:0.07});
     document.querySelectorAll('.exp-item,.proj-card,.award-card,.stat').forEach(el=>{
-      el.style.opacity='0'; el.style.transform='translateY(14px)';
+      el.style.opacity='0'; el.style.transform='translateY(12px)';
       el.style.transition='opacity 0.5s ease, transform 0.5s ease, background 0.3s, border-color 0.3s';
       fObs.observe(el);
     });
