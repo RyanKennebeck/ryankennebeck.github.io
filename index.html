@@ -18,6 +18,12 @@
       --gold-light: #debb6a;
       --gold-pale:  #f0d898;
       --gold-dim:   rgba(201,168,76,0.09);
+      /* Heraldic palette from Kennebeck coat of arms */
+      --heraldic-crimson:  #8b1a1a;   /* red unicorn / helmet plume */
+      --heraldic-brown:    #5c3d1e;   /* sable/brown stripes on shield */
+      --heraldic-silver:   #b8c4cc;   /* silver unicorn / helmet */
+      --heraldic-azure:    #1a3a6b;   /* blue waves at shield base */
+      --heraldic-gold:     #c9a84c;   /* scrollwork & banner */
       --text:       #c8d0e0;
       --text-mid:   #8090b0;
       --text-dim:   #3d4e6a;
@@ -75,10 +81,26 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 5rem;
-      background: rgba(7,9,15,0.88);
+      padding: 1rem 5rem;
+      background: rgba(7,9,15,0.92);
       backdrop-filter: blur(28px);
       border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none;
+    }
+    .nav-crest {
+      height: 36px; width: 36px;
+      object-fit: contain;
+      filter: brightness(1.1) saturate(0.85);
+      opacity: 0.88;
+      transition: opacity 0.3s, transform 0.4s, filter 0.3s;
+    }
+    .nav-brand:hover .nav-crest {
+      opacity: 1;
+      transform: rotate(-3deg) scale(1.08);
+      filter: brightness(1.2) saturate(1.0) drop-shadow(0 0 6px rgba(201,168,76,0.4));
     }
     .nav-wordmark {
       font-family: 'Playfair Display', serif;
@@ -813,13 +835,21 @@
     ══════════════════════════════ */
     footer {
       background: var(--bg3); border-top: 1px solid var(--border);
-      padding: 2.5rem 5rem;
+      padding: 2rem 5rem;
       display: flex; justify-content: space-between; align-items: center;
       position: relative; z-index: 1;
+      gap: 1rem;
     }
-    .footer-left { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-dim); }
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 100%;
+      background: linear-gradient(180deg, var(--border), transparent);
+      opacity: 0.4;
+    }
+    .footer-left { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-dim); flex: 1; }
     .footer-left em { color: var(--gold); font-style: italic; }
-    .footer-right { font-family: 'Space Mono', monospace; font-size: 0.56rem; color: var(--text-dim); letter-spacing: 0.1em; }
+    .footer-right { font-family: 'Space Mono', monospace; font-size: 0.56rem; color: var(--text-dim); letter-spacing: 0.1em; text-align: right; flex: 1; }
 
     /* ══════════════════════════════
        RESPONSIVE
@@ -873,47 +903,35 @@
     }
     @keyframes introFadeIn { to { opacity: 1; } }
 
-    /* Diamond container */
-    .intro-diamond {
-      width: 120px; height: 120px;
+    /* Real crest in intro */
+    .intro-crest-wrap {
       position: relative;
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      background: transparent;
-      animation: introDiamondSpin 0.8s cubic-bezier(.4,0,.2,1) forwards;
+      width: 160px; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      animation: introCrestDrop 0.7s cubic-bezier(.16,1.4,.72,1) forwards;
     }
-    @keyframes introDiamondSpin {
-      from { transform: rotate(45deg) scale(0); opacity: 0; }
-      to   { transform: rotate(0deg) scale(1); opacity: 1; }
+    @keyframes introCrestDrop {
+      from { transform: scale(0.5) translateY(-20px); opacity: 0; filter: brightness(3); }
+      to   { transform: scale(1) translateY(0);        opacity: 1; filter: brightness(1); }
     }
-    .intro-diamond-inner {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.04));
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      border: 1px solid rgba(201,168,76,0.4);
-      animation: introDiamondPulse 1.5s ease infinite alternate;
+    .intro-crest-img {
+      width: 140px; height: 140px;
+      object-fit: contain;
+      filter: brightness(1.1) saturate(0.9);
+      position: relative; z-index: 2;
+      animation: introCrestPulse 2.5s ease infinite alternate;
     }
-    @keyframes introDiamondPulse {
-      from { box-shadow: inset 0 0 20px rgba(201,168,76,0.1); }
-      to   { box-shadow: inset 0 0 40px rgba(201,168,76,0.35); }
+    @keyframes introCrestPulse {
+      from { filter: brightness(1.0) saturate(0.85) drop-shadow(0 0 8px rgba(201,168,76,0.3)); }
+      to   { filter: brightness(1.25) saturate(1.0)  drop-shadow(0 0 22px rgba(201,168,76,0.6)); }
     }
-
-    /* Monogram inside diamond */
-    .intro-monogram {
-      position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem; font-weight: 900;
-      background: linear-gradient(135deg, var(--gold), var(--gold-pale));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      z-index: 1;
-      letter-spacing: -0.02em;
-      animation: introMonogram 0.6s 0.4s both;
+    .intro-crest-ring {
+      position: absolute; border-radius: 50%; z-index: 1;
+      border: 1px solid rgba(201,168,76,0.2);
+      animation: orbitSpin var(--spd,12s) linear infinite;
     }
-    @keyframes introMonogram {
-      from { opacity: 0; letter-spacing: 0.4em; }
-      to   { opacity: 1; letter-spacing: -0.02em; }
-    }
+    .intro-crest-ring.r1 { inset:-18px; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%); --spd:10s; }
+    .intro-crest-ring.r2 { inset:-32px; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%); --spd:16s; animation-direction:reverse; border-style:dashed; border-color:rgba(201,168,76,0.1); }
 
     .intro-lines {
       display: flex; align-items: center; gap: 1.2rem;
@@ -990,6 +1008,53 @@
       100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(201,168,76,0.1), 0 0 16px rgba(201,168,76,0.25); }
     }
 
+    /* ── COAT OF ARMS GHOST STAMP ── */
+    .crest-stamp {
+      position: absolute;
+      pointer-events: none; user-select: none;
+      opacity: 0.032;
+      filter: grayscale(1) brightness(2.5) contrast(0.6);
+      z-index: 0;
+    }
+    /* Hero bg stamp */
+    #hero .crest-stamp {
+      width: 520px; height: 520px;
+      object-fit: contain;
+      right: 6%; top: 50%; transform: translateY(-50%);
+      opacity: 0.04;
+    }
+    /* About section stamp */
+    #about .crest-stamp {
+      width: 340px; height: 340px;
+      object-fit: contain;
+      right: -40px; bottom: -60px;
+      opacity: 0.028;
+    }
+    /* Footer stamp */
+    .footer-crest {
+      height: 48px; width: 48px;
+      object-fit: contain;
+      filter: brightness(1.1) saturate(0.7);
+      opacity: 0.55;
+      transition: opacity 0.3s, transform 0.4s;
+    }
+    .footer-crest:hover { opacity: 0.85; transform: scale(1.08) rotate(-2deg); }
+
+    /* ── HERALDIC spine line on experience ── */
+    #experience { position: relative; }
+    #experience::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        var(--heraldic-crimson) 20%,
+        var(--heraldic-gold) 50%,
+        var(--heraldic-brown) 80%,
+        transparent 100%
+      );
+      opacity: 0.35;
+    }
+
     /* ── TAG hover ── */
     .tag { transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s; }
     .tag:hover { transform: translateY(-2px); }
@@ -1011,10 +1076,11 @@
   <div id="intro">
     <canvas id="intro-canvas"></canvas>
     <div class="intro-center">
-      <div class="intro-diamond">
-        <div class="intro-diamond-inner"></div>
+      <div class="intro-crest-wrap">
+        <img src="images/coat_of_arms.png" alt="Kennebeck Crest" class="intro-crest-img"/>
+        <div class="intro-crest-ring r1"></div>
+        <div class="intro-crest-ring r2"></div>
       </div>
-      <div class="intro-monogram">RK</div>
       <div class="intro-lines">
         <div class="intro-line"></div>
         <div class="intro-tagline">Ryan Kennebeck</div>
@@ -1032,7 +1098,10 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-wordmark">Ryan <em>Kennebeck</em></div>
+    <a href="#hero" class="nav-brand">
+      <img src="images/coat_of_arms.png" alt="Kennebeck Crest" class="nav-crest"/>
+      <div class="nav-wordmark">Ryan <em>Kennebeck</em></div>
+    </a>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -1046,6 +1115,7 @@
   <section id="hero">
     <div class="hero-left">
       <div class="hero-initials">RK</div>
+      <img src="images/coat_of_arms.png" alt="" class="crest-stamp" aria-hidden="true" style="position:absolute;width:480px;height:480px;right:-60px;top:50%;transform:translateY(-50%);opacity:0.038;filter:grayscale(1) brightness(2.2) contrast(0.5);z-index:0;pointer-events:none;user-select:none;object-fit:contain;"/>
       <div class="hero-text-wrap">
         <div class="hero-kicker">Cybersecurity &amp; Global Policy</div>
         <h1 class="hero-name">
@@ -1109,7 +1179,8 @@
   </div>
 
   <!-- ABOUT -->
-  <section id="about">
+  <section id="about" style="position:relative;overflow:hidden;">
+    <img src="images/coat_of_arms.png" alt="" aria-hidden="true" style="position:absolute;width:380px;height:380px;right:-50px;bottom:-50px;opacity:0.025;filter:grayscale(1) brightness(2.5) contrast(0.5);pointer-events:none;user-select:none;object-fit:contain;z-index:0;"/>
     <div class="sec-header">
       <span class="sec-num">I.</span>
       <h2>Profile</h2>
@@ -1388,7 +1459,8 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
+  <section id="contact" style="position:relative;overflow:hidden;">
+    <img src="images/coat_of_arms.png" alt="" aria-hidden="true" style="position:absolute;width:500px;height:500px;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0.022;filter:grayscale(1) brightness(2.5) contrast(0.5);pointer-events:none;user-select:none;object-fit:contain;z-index:0;"/>
     <div class="sec-header">
       <span class="sec-num">VI.</span>
       <h2>Get in Touch</h2>
@@ -1414,6 +1486,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">Ryan <em>Kennebeck</em> — Indiana University, Class of 2028</div>
+    <img src="images/coat_of_arms.png" alt="Kennebeck Crest" class="footer-crest" title="Kennebeck Family Crest"/>
     <div class="footer-right">Cybersecurity &amp; Global Policy · Cincinnati &amp; Bloomington</div>
   </footer>
 
