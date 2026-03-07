@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Kennebeck</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
       /* Warm dark bases — navy faded toward crimson */
@@ -43,9 +43,12 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
       overflow-x: hidden;
       cursor: none;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ── CURSOR ── */
@@ -122,16 +125,19 @@
       filter: brightness(1.2) saturate(1.0) drop-shadow(0 0 6px rgba(201,168,76,0.4));
     }
     .nav-wordmark {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--white); letter-spacing: 0.04em;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.06em; text-transform: uppercase;
     }
-    .nav-wordmark em { color: var(--gold); font-style: italic; }
+    .nav-wordmark em {
+      color: var(--gold); font-style: normal;
+      font-weight: 800; letter-spacing: 0.02em;
+    }
     nav ul { display: flex; gap: 2.8rem; list-style: none; }
     nav a {
       font-size: 0.7rem; font-weight: 500;
       color: var(--text-dim); text-decoration: none;
-      letter-spacing: 0.15em; text-transform: uppercase;
+      letter-spacing: 0.12em; text-transform: uppercase;
       transition: color 0.2s; position: relative;
     }
     nav a::after {
@@ -159,6 +165,7 @@
       display: flex; flex-direction: column; justify-content: center;
       padding: 8rem 5rem 5rem;
       position: relative; z-index: 2;
+      container-type: inline-size;
       background: linear-gradient(160deg, #0e080e 0%, var(--bg2) 60%, #100810 100%);
       border-right: 1px solid rgba(139,26,26,0.25);
     }
@@ -178,8 +185,8 @@
     .hero-initials {
       position: absolute;
       bottom: -0.1em; left: -0.05em;
-      font-family: 'Playfair Display', serif;
-      font-size: 38vw; font-weight: 900; line-height: 0.75;
+      font-family: 'Syne', sans-serif;
+      font-size: 22vw; font-weight: 900; line-height: 0.75;
       color: transparent;
       -webkit-text-stroke: 1px rgba(201,168,76,0.04);
       pointer-events: none; user-select: none;
@@ -190,7 +197,7 @@
 
     .hero-kicker {
       display: flex; align-items: center; gap: 1rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem; color: var(--gold);
       letter-spacing: 0.3em; text-transform: uppercase;
       margin-bottom: 2.2rem;
@@ -200,14 +207,19 @@
 
     /* LARGE HERO NAME */
     .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(5rem, 8vw, 9.5rem);
-      font-weight: 900; line-height: 0.88;
-      color: var(--white); letter-spacing: -0.03em;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 9cqw, 5.8rem);
+      font-weight: 800; line-height: 0.95;
+      color: var(--white); letter-spacing: -0.02em;
       opacity: 0; animation: fadeUp 0.8s 0.45s forwards;
+      width: 100%;
     }
     .hero-name .line2 {
-      display: block; font-style: italic;
+      display: block;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      transform: skewX(-4deg);
+      transform-origin: left center;
       background: linear-gradient(100deg, var(--gold), var(--gold-light) 55%, var(--gold-pale));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -262,7 +274,7 @@
     }
     .status-item {
       display: flex; align-items: center; gap: 0.5rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.59rem; color: var(--text-dim);
       letter-spacing: 0.1em; text-transform: uppercase;
     }
@@ -408,18 +420,18 @@
       display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
     }
     .hero-photo-caption-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 1rem; font-weight: 700; color: var(--white);
     }
-    .hero-photo-caption-name em { color: var(--gold); font-style: italic; }
+    .hero-photo-caption-name em { color: var(--gold); font-style: normal; font-weight: 700; }
     .hero-photo-caption-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.53rem; color: var(--text-dim);
       letter-spacing: 0.16em; text-transform: uppercase;
     }
     .hero-scroll-hint {
       display: flex; align-items: center; gap: 0.5rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.52rem; color: var(--text-dim);
       letter-spacing: 0.12em; text-transform: uppercase;
       animation: bounce 2s ease infinite; margin-top: 0.5rem;
@@ -460,9 +472,9 @@
     .marquee-item {
       display: inline-flex; align-items: center; gap: 1.5rem;
       padding: 0 2.5rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
+      letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--bg);
     }
     .marquee-sep { opacity: 0.4; font-size: 0.5rem; }
@@ -483,7 +495,7 @@
     }
     .about-text strong { color: var(--gold-light); font-weight: 500; }
     .about-text p:first-child::first-letter {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 4rem; font-weight: 700; color: var(--gold);
       float: left; line-height: 0.76; margin-right: 0.1em; margin-top: 0.1em;
     }
@@ -522,7 +534,7 @@
       position: absolute; bottom:0; left:0; right:0; z-index: 2;
       background: linear-gradient(transparent 0%, rgba(5,7,14,0.88) 28%, rgba(5,7,14,0.99) 100%);
       padding: 4rem 1.6rem 1.4rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.68rem; color: #e8c96a;
       letter-spacing: 0.11em; text-transform: uppercase;
       line-height: 1.75;
@@ -554,7 +566,7 @@
     }
     .stat:hover::after { transform: scaleX(1); }
     .stat-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 2.4rem; font-weight: 700; color: var(--white); line-height: 1;
     }
     .stat-num sup { font-size: 1.1rem; color: var(--gold); vertical-align: super; }
@@ -575,14 +587,15 @@
       margin-bottom: 5rem;
     }
     .sec-num {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem; color: var(--crimson-light);
-      letter-spacing: 0.22em; white-space: nowrap;
+      letter-spacing: 0.16em; white-space: nowrap;
     }
     h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
-      font-weight: 700; color: var(--white); letter-spacing: -0.01em;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: 0.01em; text-transform: uppercase;
     }
     .sec-line { flex:1; height:1px; background: linear-gradient(90deg, var(--border2), transparent); }
 
@@ -634,7 +647,7 @@
       transform: scale(1.08);
     }
     .exp-date {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem; color: var(--gold);
       letter-spacing: 0.08em; line-height: 1.6; text-align: center;
     }
@@ -658,8 +671,9 @@
 
     .exp-body { padding-bottom: 0.5rem; }
     .exp-role {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.22rem; font-weight: 800; color: var(--white);
+      margin-bottom: 0.25rem; letter-spacing: 0.01em;
     }
     .exp-org {
       font-size: 0.8rem; font-weight: 500; color: var(--gold);
@@ -674,7 +688,7 @@
     .exp-bullets li strong { color: var(--white); font-weight: 500; }
     .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
     .tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.55rem; letter-spacing: 0.09em; text-transform: uppercase;
       padding: 0.28rem 0.65rem;
       background: transparent; border: 1px solid var(--border2);
@@ -705,7 +719,7 @@
     .proj-card::before {
       content: attr(data-index);
       position: absolute; top: 1.5rem; right: 2.2rem;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 5.5rem; font-weight: 900;
       color: rgba(201,168,76,0.05); line-height: 1;
       transition: color 0.3s;
@@ -719,13 +733,13 @@
     }
     .proj-card:hover::after { height: 100%; }
     .proj-tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.58rem; color: var(--gold);
       letter-spacing: 0.18em; text-transform: uppercase;
       margin-bottom: 1rem; display: block;
     }
     .proj-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 1.5rem; font-weight: 700; color: var(--white);
       margin-bottom: 1rem; line-height: 1.2;
     }
@@ -734,7 +748,7 @@
     .proj-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
       margin-top: 1.4rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem; color: var(--gold);
       text-decoration: none; letter-spacing: 0.1em;
       transition: gap 0.2s, color 0.2s;
@@ -752,7 +766,7 @@
       gap: 5rem; align-items: start;
     }
     .skills-intro h3 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 1.6rem; font-weight: 700; color: var(--white);
       margin-bottom: 1rem; line-height: 1.3;
     }
@@ -768,7 +782,7 @@
 
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 4rem; }
     .skill-group-title {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.6rem; color: var(--gold);
       letter-spacing: 0.18em; text-transform: uppercase;
       margin-bottom: 1.1rem;
@@ -780,7 +794,7 @@
       display: flex; justify-content: space-between;
       font-size: 0.84rem; color: var(--text); margin-bottom: 0.4rem; font-weight: 400;
     }
-    .skill-row-pct { font-family: 'Space Mono', monospace; font-size: 0.57rem; color: var(--text-dim); }
+    .skill-row-pct { font-family: 'IBM Plex Mono', monospace; font-size: 0.57rem; color: var(--text-dim); }
     .bar-track { height: 2px; background: var(--border); position: relative; }
     .bar-fill {
       position: absolute; top:0; left:0; height:100%;
@@ -809,13 +823,30 @@
       transform: translateY(-5px);
       box-shadow: 0 12px 36px rgba(0,0,0,0.4), 0 0 16px rgba(201,168,76,0.05);
     }
-    .award-icon { font-size: 1.5rem; margin-bottom: 1.2rem; display: block; }
+    .award-icon {
+      display: block;
+      width: 38px; height: 38px;
+      margin-bottom: 1.4rem;
+      color: var(--gold);
+      opacity: 0.9;
+      flex-shrink: 0;
+    }
+    .award-icon svg {
+      width: 100%; height: 100%;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .award-card:hover .award-icon {
+      color: var(--gold-light);
+      opacity: 1;
+      filter: drop-shadow(0 0 6px rgba(201,168,76,0.4));
+    }
     .award-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem;
     }
     .award-org {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.57rem; color: var(--gold);
       letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.7rem;
     }
@@ -842,9 +873,18 @@
     }
     .contact-detail:last-child { border-bottom: none; }
     .contact-detail:hover { background: var(--panel); }
-    .contact-detail-icon { font-size: 1rem; flex-shrink: 0; opacity: 0.4; }
+    .contact-detail-icon {
+      flex-shrink: 0; opacity: 0.55;
+      width: 18px; height: 18px; color: var(--gold);
+    }
+    .contact-detail-icon svg {
+      width: 100%; height: 100%;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .contact-detail:hover .contact-detail-icon { opacity: 0.9; }
     .contact-detail-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.55rem; color: var(--gold);
       letter-spacing: 0.14em; text-transform: uppercase;
       display: block; margin-bottom: 0.2rem;
@@ -870,9 +910,9 @@
       background: linear-gradient(180deg, var(--border), transparent);
       opacity: 0.4;
     }
-    .footer-left { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-dim); flex: 1; }
-    .footer-left em { color: var(--gold); font-style: italic; }
-    .footer-right { font-family: 'Space Mono', monospace; font-size: 0.56rem; color: var(--text-dim); letter-spacing: 0.1em; text-align: right; flex: 1; }
+    .footer-left { font-family: 'Syne', sans-serif; font-size: 1rem; color: var(--text-dim); flex: 1; }
+    .footer-left em { color: var(--gold); font-style: normal; font-weight: 700; }
+    .footer-right { font-family: 'IBM Plex Mono', monospace; font-size: 0.56rem; color: var(--text-dim); letter-spacing: 0.1em; text-align: right; flex: 1; }
 
     /* ══════════════════════════════
        RESPONSIVE
@@ -965,14 +1005,14 @@
     @keyframes introSlideUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 
     .intro-tagline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Syne', sans-serif;
       font-size: 1.5rem; font-weight: 700;
       color: var(--white); letter-spacing: 0.06em;
       white-space: nowrap;
     }
 
     .intro-sub {
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem; color: var(--gold);
       letter-spacing: 0.32em; text-transform: uppercase;
       animation: introSlideUp 0.5s 0.9s both;
@@ -994,7 +1034,7 @@
     /* Corner labels */
     .intro-corner {
       position: absolute;
-      font-family: 'Space Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.52rem; color: rgba(201,168,76,0.3);
       letter-spacing: 0.18em; text-transform: uppercase;
     }
@@ -1493,12 +1533,36 @@
       <div class="sec-line"></div>
     </div>
     <div class="awards-grid">
-      <div class="award-card"><span class="award-icon">🏛️</span><div class="award-title">FBI Collegiate Academy</div><div class="award-org">FBI Indianapolis · 2025</div><p class="award-desc">Selected for a highly competitive program offering direct engagement with FBI professionals in investigative strategy, intelligence coordination, and the evolving cyber threat landscape.</p></div>
-      <div class="award-card"><span class="award-icon">🎖️</span><div class="award-title">Chapter of Achievement — 2nd of 35</div><div class="award-org">Indiana University OSFL · 2025</div><p class="award-desc">Led Kappa Sigma Beta Theta to a top-two finish among 35 competing chapters university-wide, recognizing excellence in leadership, compliance, and community impact.</p></div>
-      <div class="award-card"><span class="award-icon">🔐</span><div class="award-title">DEF CON Las Vegas</div><div class="award-org">AP2T Labs · 2025</div><p class="award-desc">Attended one of the world's most prestigious hacking and cybersecurity conferences, sponsored by AP2T Labs. Connected with leading researchers at the field's frontier.</p></div>
-      <div class="award-card"><span class="award-icon">🎓</span><div class="award-title">Dean's Scholarship</div><div class="award-org">Indiana University · 2024</div><p class="award-desc">Merit-based scholarship recognizing exceptional academic achievement. Member of the Hoosier Scholars Program. Graduated high school Summa Cum Laude with a 4.6 GPA.</p></div>
-      <div class="award-card"><span class="award-icon">🌍</span><div class="award-title">Cross-Continental AI Deployment</div><div class="award-org">Northumbria Police · UK · 2025</div><p class="award-desc">Among a select group chosen to develop and deploy a live AI platform for UK law enforcement in a collaboration spanning two universities and two countries.</p></div>
-      <div class="award-card"><span class="award-icon">📜</span><div class="award-title">Google Cybersecurity Certificate</div><div class="award-org">Google · July 2025</div><p class="award-desc">Professional certification covering threat detection, network security, incident response, and security operations. Pursuing CompTIA Security+ to follow.</p></div>
+      <!-- FBI Collegiate Academy -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 3v4M9 10h.01M15 10h.01"/></svg></span>
+        <div class="award-title">FBI Collegiate Academy</div><div class="award-org">FBI Indianapolis · 2025</div><p class="award-desc">Selected for a highly competitive program offering direct engagement with FBI professionals in investigative strategy, intelligence coordination, and the evolving cyber threat landscape.</p>
+      </div>
+      <!-- Chapter of Achievement -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 12v9"/><path d="M8 17l4 4 4-4"/><path d="M6 8H3l1.5 3H3"/><path d="M18 8h3l-1.5 3H21"/></svg></span>
+        <div class="award-title">Chapter of Achievement — 2nd of 35</div><div class="award-org">Indiana University OSFL · 2025</div><p class="award-desc">Led Kappa Sigma Beta Theta to a top-two finish among 35 competing chapters university-wide, recognizing excellence in leadership, compliance, and community impact.</p>
+      </div>
+      <!-- DEF CON -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l3 3-3 3M13 14h4"/></svg></span>
+        <div class="award-title">DEF CON Las Vegas</div><div class="award-org">AP2T Labs · 2025</div><p class="award-desc">Attended one of the world's most prestigious hacking and cybersecurity conferences, sponsored by AP2T Labs. Connected with leading researchers at the field's frontier.</p>
+      </div>
+      <!-- Dean's Scholarship -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5"/></svg></span>
+        <div class="award-title">Dean's Scholarship</div><div class="award-org">Indiana University · 2024</div><p class="award-desc">Merit-based scholarship recognizing exceptional academic achievement. Member of the Hoosier Scholars Program. Graduated high school Summa Cum Laude with a 4.6 GPA.</p>
+      </div>
+      <!-- Cross-Continental AI -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M12 2v20"/></svg></span>
+        <div class="award-title">Cross-Continental AI Deployment</div><div class="award-org">Northumbria Police · UK · 2025</div><p class="award-desc">Among a select group chosen to develop and deploy a live AI platform for UK law enforcement in a collaboration spanning two universities and two countries.</p>
+      </div>
+      <!-- Google Cert -->
+      <div class="award-card">
+        <span class="award-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/><path d="M9 9h1"/></svg></span>
+        <div class="award-title">Google Cybersecurity Certificate</div><div class="award-org">Google · July 2025</div><p class="award-desc">Professional certification covering threat detection, network security, incident response, and security operations. Pursuing CompTIA Security+ to follow.</p>
+      </div>
     </div>
   </section>
 
@@ -1519,10 +1583,10 @@
         </div>
       </div>
       <div class="contact-right">
-        <div class="contact-detail"><div class="contact-detail-icon">✉</div><div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="/cdn-cgi/l/email-protection#bdcfc4dcd3d6d8d3d3d8dfd8ded68d8bfddad0dcd4d193ded2d0"><span class="__cf_email__" data-cfemail="592b203837323c37373c3b3c3a32696f193e34383035773a3634">[email&#160;protected]</span></a></div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon">📍</div><div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon">🔗</div><div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon">⌨</div><div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="mailto:ryankennebeck06@gmail.com">ryankennebeck06@gmail.com</a></div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div><div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div></div>
       </div>
     </div>
   </section>
