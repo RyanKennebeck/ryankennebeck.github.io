@@ -7,26 +7,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:         #07090f;
-      --bg2:        #090c18;
-      --bg3:        #0c1020;
-      --panel:      #0f1525;
-      --panel2:     #131a2e;
-      --border:     #1a2238;
-      --border2:    #222e48;
+      /* Warm dark bases — navy faded toward crimson */
+      --bg:         #080608;
+      --bg2:        #0a0810;
+      --bg3:        #0c0a14;
+      --panel:      #100c18;
+      --panel2:     #130f1e;
+      --border:     #241828;
+      --border2:    #2e2038;
+      /* Gold — the anchor */
       --gold:       #c9a84c;
       --gold-light: #debb6a;
       --gold-pale:  #f0d898;
       --gold-dim:   rgba(201,168,76,0.09);
-      /* Heraldic palette from Kennebeck coat of arms */
-      --heraldic-crimson:  #8b1a1a;   /* red unicorn / helmet plume */
-      --heraldic-brown:    #5c3d1e;   /* sable/brown stripes on shield */
-      --heraldic-silver:   #b8c4cc;   /* silver unicorn / helmet */
-      --heraldic-azure:    #1a3a6b;   /* blue waves at shield base */
-      --heraldic-gold:     #c9a84c;   /* scrollwork & banner */
-      --text:       #c8d0e0;
-      --text-mid:   #8090b0;
-      --text-dim:   #3d4e6a;
+      /* Crimson — pulled from coat of arms */
+      --crimson:        #8b1a1a;
+      --crimson-light:  #b02020;
+      --crimson-dim:    rgba(139,26,26,0.12);
+      --crimson-glow:   rgba(139,26,26,0.25);
+      /* Heraldic extras */
+      --heraldic-crimson:  #8b1a1a;
+      --heraldic-brown:    #5c3d1e;
+      --heraldic-silver:   #b8c4cc;
+      --heraldic-azure:    #1a3a6b;
+      --heraldic-gold:     #c9a84c;
+      /* Text */
+      --text:       #cdd0dc;
+      --text-mid:   #7a7a9a;
+      --text-dim:   #40384e;
       --white:      #eef2fa;
     }
 
@@ -66,14 +74,25 @@
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--crimson), var(--gold), var(--crimson)); }
+
+    /* ── GLOBAL CRIMSON VIGNETTE — fixed behind everything ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse at 0% 0%,   rgba(100,12,12,0.22) 0%, transparent 45%),
+        radial-gradient(ellipse at 100% 0%,  rgba(80,10,10,0.14)  0%, transparent 40%),
+        radial-gradient(ellipse at 100% 100%, rgba(100,12,12,0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at 0% 100%,  rgba(80,10,10,0.12)  0%, transparent 40%);
+    }
 
     /* ── GRID BG ── */
     .grid-bg {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image:
-        linear-gradient(rgba(201,168,76,0.014) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.014) 1px, transparent 1px);
+        linear-gradient(rgba(180,100,60,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180,100,60,0.018) 1px, transparent 1px);
       background-size: 70px 70px;
     }
 
@@ -82,9 +101,9 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 5rem;
-      background: rgba(7,9,15,0.92);
+      background: rgba(10,6,10,0.94);
       backdrop-filter: blur(28px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(139,26,26,0.2);
     }
     .nav-brand {
       display: flex; align-items: center; gap: 0.85rem;
@@ -140,17 +159,17 @@
       display: flex; flex-direction: column; justify-content: center;
       padding: 8rem 5rem 5rem;
       position: relative; z-index: 2;
-      background: var(--bg2);
-      border-right: 1px solid var(--border);
+      background: linear-gradient(160deg, #0e080e 0%, var(--bg2) 60%, #100810 100%);
+      border-right: 1px solid rgba(139,26,26,0.25);
     }
 
-    /* ruled lines */
+    /* ruled lines with warm crimson tint */
     .hero-left::before {
       content: '';
       position: absolute; inset: 0;
       background-image: repeating-linear-gradient(
         0deg, transparent, transparent 79px,
-        rgba(201,168,76,0.035) 79px, rgba(201,168,76,0.035) 80px
+        rgba(160,60,40,0.03) 79px, rgba(160,60,40,0.03) 80px
       );
       pointer-events: none;
     }
@@ -250,7 +269,7 @@
     .dot { width: 5px; height: 5px; border-radius: 50%; }
     .dot-gold  { background: var(--gold); animation: pdot 2s ease infinite; }
     .dot-green { background: #27ae60; animation: pdot 2s ease 0.5s infinite; }
-    .dot-red   { background: #c0392b; }
+    .dot-red   { background: var(--crimson-light); }
     @keyframes pdot { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     @keyframes fadeUp {
@@ -261,19 +280,21 @@
     /* ── HERO RIGHT — PHOTO ── */
     .hero-right {
       position: relative; overflow: hidden;
-      background: var(--bg3);
+      background: radial-gradient(ellipse at 50% 48%, #1a0a10 0%, #0c080e 45%, #080508 100%);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       padding: 7rem 3rem 3rem;
       gap: 2rem;
     }
 
-    /* Angled background slice for drama */
+    /* Crimson corner vignettes + center glow */
     .hero-right::before {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--bg3) 60%, rgba(201,168,76,0.03) 100%);
-      pointer-events: none;
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse at 15% 12%, rgba(139,26,26,0.14) 0%, transparent 42%),
+        radial-gradient(ellipse at 85% 88%, rgba(139,26,26,0.10) 0%, transparent 38%),
+        radial-gradient(ellipse at 50% 46%, rgba(100,15,15,0.12) 0%, transparent 55%);
     }
 
     /* THE SHAPED PHOTO FRAME */
@@ -287,15 +308,15 @@
     .hero-photo-frame::before {
       content: '';
       position: absolute; inset: -4px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light) 50%, var(--gold));
+      background: linear-gradient(135deg, var(--crimson), var(--gold) 50%, var(--crimson-light));
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      opacity: 0.45;
+      opacity: 0.55;
       z-index: 0;
       animation: frameGlow 3s ease infinite alternate;
     }
     @keyframes frameGlow {
-      from { opacity: 0.2; filter: blur(0px); }
-      to   { opacity: 0.7; filter: blur(2px); }
+      from { opacity: 0.3; filter: blur(0px); }
+      to   { opacity: 0.75; filter: blur(2px); }
     }
 
     /* Bottom fade overlay — diamond */
@@ -424,12 +445,13 @@
        MARQUEE STRIP
     ══════════════════════════════ */
     .marquee-strip {
-      background: var(--gold);
+      background: linear-gradient(90deg, var(--crimson) 0%, #9a2020 15%, var(--gold) 50%, #9a2020 85%, var(--crimson) 100%);
       padding: 0.9rem 0;
       overflow: hidden; white-space: nowrap;
       position: relative; z-index: 1;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 24px rgba(139,26,26,0.35);
     }
     .marquee-inner {
       display: inline-flex; gap: 0;
@@ -554,7 +576,7 @@
     }
     .sec-num {
       font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; color: var(--gold);
+      font-size: 0.65rem; color: var(--crimson-light);
       letter-spacing: 0.22em; white-space: nowrap;
     }
     h2 {
@@ -624,12 +646,13 @@
     .timeline-spine { display:flex; flex-direction:column; align-items:center; }
     .spine-dot {
       width: 10px; height: 10px; border-radius: 50%;
-      background: var(--gold); flex-shrink: 0; margin-top: 0.3rem;
-      box-shadow: 0 0 0 4px rgba(201,168,76,0.1), 0 0 16px rgba(201,168,76,0.25);
+      background: linear-gradient(135deg, var(--crimson-light), var(--gold));
+      flex-shrink: 0; margin-top: 0.3rem;
+      box-shadow: 0 0 0 4px rgba(139,26,26,0.12), 0 0 16px rgba(176,32,32,0.3);
     }
     .spine-line {
       flex:1; width:1px;
-      background: linear-gradient(180deg, rgba(201,168,76,0.22), transparent);
+      background: linear-gradient(180deg, rgba(139,26,26,0.3), rgba(201,168,76,0.15), transparent);
       margin-top: 8px;
     }
 
@@ -1115,7 +1138,6 @@
   <section id="hero">
     <div class="hero-left">
       <div class="hero-initials">RK</div>
-      <img src="images/coat_of_arms.png" alt="" class="crest-stamp" aria-hidden="true" style="position:absolute;width:480px;height:480px;right:-60px;top:50%;transform:translateY(-50%);opacity:0.038;filter:grayscale(1) brightness(2.2) contrast(0.5);z-index:0;pointer-events:none;user-select:none;object-fit:contain;"/>
       <div class="hero-text-wrap">
         <div class="hero-kicker">Cybersecurity &amp; Global Policy</div>
         <h1 class="hero-name">
@@ -1139,6 +1161,28 @@
 
     <div class="hero-right">
       <div class="hero-particles" id="heroParticles"></div>
+      <!-- Coat of arms ghost stamp — huge, centered, behind photo -->
+      <img
+        src="images/coat_of_arms.png" alt="" aria-hidden="true"
+        style="
+          position:absolute;
+          width:88%; max-width:700px;
+          aspect-ratio:1/1;
+          left:50%; top:50%;
+          transform:translate(-50%,-52%);
+          object-fit:contain;
+          opacity:0.18;
+          filter:
+            sepia(0.6)
+            brightness(1.4)
+            contrast(0.65)
+            saturate(0.5)
+            hue-rotate(-8deg);
+          pointer-events:none; user-select:none;
+          z-index:1;
+          mix-blend-mode: screen;
+        "
+      />
       <div class="hero-photo-frame">
         <div class="hero-photo-ring"></div>
         <div class="hero-photo-ring2"></div>
